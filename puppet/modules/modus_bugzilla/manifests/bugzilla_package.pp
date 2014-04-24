@@ -15,26 +15,35 @@
   # module designed to provide bugzilla package, this is done through git
 
   # class definition - start
-  class bugzilla::bugzilla_package (
+  class modus_bugzilla::bugzilla_package (
 
-    $bugzilla_target_dir        =   '/usr/local',
-    $bugzilla_package_version   =   '4.4',
+    $package_type          =   undef,
+    $package_version       =   undef,
+    $bugzilla_target_dir   =   '/usr/local',
   ){
 
     # class required for this module to work
-    require bugzilla::git_package
+    require modus_bugzilla::git_package
 
     # class variables
-    $path               =   '/usr/bin:/usr/sbin:/bin'
-    $bugzilla_clone     =   "git clone --branch bugzilla-${bugzilla_package_version} http://git.mozilla.org/bugzilla/bugzilla"
+    $path   =   '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin'
+
+    if $package_type == 'branch'
+    {
+      $bugzilla_package_clone   =   "git clone --branch ${package_version} http://git.mozilla.org/bugzilla/bugzilla"
+    }
+    elsif $package_type == 'tag'
+    {
+      $bugzilla_package_clone   =   "git clone --branch bugzilla-${package_version} http://git.mozilla.org/bugzilla/bugzilla"
+    }
 
     # bugzilla package cloning
-    exec { $bugzilla_clone:
+    exec { "${bugzilla_package_clone}":
       path      =>   $path,
       cwd       =>   "${bugzilla_target_dir}",
       user      =>   root,
       group     =>   www-data,
-      #creates   =>   "${bugzilla_target_dir}/bugzilla",
+      creates   =>   "${bugzilla_target_dir}/bugzilla/index.cgi",
     }
   }
   # class definition - end

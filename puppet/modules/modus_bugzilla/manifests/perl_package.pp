@@ -12,14 +12,20 @@
   #   See the License for the specific language governing permissions and
   #   limitations under the License.
 
-  # module designed to install and set up the latest apache package, this is done through puppetlabs-apache module
+  # module designed to install the latest perl, pmtools and cpanminus packages
 
   # class definition - start
-  class bugzilla::httpd_package {
+  class modus_bugzilla::perl_package (
 
-    # apache package installation and set up with mod_heaers and mod_expires enabled
-    include ::apache
-    include ::apache::mod::headers
-    include ::apache::mod::expires
+    $perl                    =   'perl',
+    $perl_packages_version   =   'latest',
+  ){
+
+    # perl package installation
+    if ! defined(Package["${perl}"]) {
+      package { "${perl}":
+        ensure   =>   $perl_packages_version,
+      }
+    }
   }
   # class definition - end

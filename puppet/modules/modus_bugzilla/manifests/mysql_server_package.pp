@@ -15,22 +15,23 @@
   # module designed to install the latest mysql package, this is done through puppetlabs-mysql module
 
   # class definition - start
-  class bugzilla::mysql_server_package (
+  class modus_bugzilla::mysql_server_package (
 
-    $mysql_dev                   =   'libmysqld-dev',
+    $mysql_dev_package           =   'libmysqld-dev',
     $mysql_dev_package_version   =   'latest',
   ){
 
-    # mysql dev package installation
-    if ! defined(Package[$mysql_dev]) {
-      package { $mysql_dev:
-        ensure   =>   $mysql_dev_package_version,
-      }
-    }
-
     # mysql server installation and set up with default parameters
     class  { '::mysql::server':
-      require   =>   Package[$mysql_dev],
+      require   =>   Package["${mysql_dev_package}"],
+    }
+
+    # mysql dev package installation
+    if ! defined(Package["${mysql_dev_package}"]) {
+      package { "${mysql_dev_package}":
+        ensure    =>   $mysql_dev_package_version,
+        #require   =>   Class['::mysql::server'],
+      }
     }
   }
   # class definition - end

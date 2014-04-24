@@ -15,7 +15,7 @@
   # module designed to interact with mysql through puppetlabs-mysql module in order to create a new database with its user for bugzilla to work with
 
   # class definition - start
-  class bugzilla::mysql_server_config {
+  class modus_bugzilla::mysql_server_config {
 
     # creates "bugzilla_db" and "bugzilla_user" on localhost and manage them within mysql
     ::mysql::db { 'bugzilla_db':

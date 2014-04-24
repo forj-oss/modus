@@ -15,36 +15,36 @@
   # module designed to install and set up bugzilla
 
   # class definition - start
-  class bugzilla::bugzilla_config (
+  class modus_bugzilla::bugzilla_config (
 
-    $create_htaccess    =   true,
-    $webservergroup     =   'www-data',
-    $use_suexec         =   false,
-    $db_driver          =   'mysql',
-    $db_host            =   'localhost',
-    $db_name            =   'bugzilla_db',
-    $db_user            =   'bugzilla_user',
-    $db_pass            =   'letmein',
-    $db_port            =   0,
-    $db_sock            =   '',
-    $db_check           =   false,
-    $index_html         =   false,
-    $cvsbin             =   '/usr/bin/cvs',
-    $interdiffbin       =   '/usr/bin/interdiff',
-    $diffpath           =   '/usr/bin',
-    $site_wide_secret   =   '123456789abcdefghijklmnopqrstuvwxyz',
-    $admin_email        =   'diegodnova@hp.com',
-    $admin_password     =   'letmein',
-    $admin_realname     =   'Diego De Nova',
-    $no_pause           =   true,
-    $smtp_server        =   'localhost',
+    $create_htaccess       =   true,
+    $webservergroup        =   'www-data',
+    $use_suexec            =   false,
+    $db_driver             =   'mysql',
+    $db_host               =   'localhost',
+    $db_name               =   'bugzilla_db',
+    $db_user               =   'bugzilla_user',
+    $db_pass               =   'letmein',
+    $db_port               =   0,
+    $db_sock               =   '',
+    $db_check              =   false,
+    $index_html            =   false,
+    $cvsbin                =   '/usr/bin/cvs',
+    $interdiffbin          =   '/usr/bin/interdiff',
+    $diffpath              =   '/usr/bin',
+    $site_wide_secret      =   '',
+    $admin_email           =   'diegodnova@hp.com',
+    $admin_password        =   'letmein',
+    $admin_realname        =   'Diego De Nova',
+    $no_pause              =   true,
+    $smtp_server           =   'localhost',
+    $bugzilla_target_dir   =   '/usr/local'
   ){
 
     # class variables
-    $path                   =   '/usr/bin:/usr/sbin:/bin'
-    $bugzilla_target_dir    =   '/usr/local'
-    $config_file            =   "${bugzilla_target_dir}/bugzilla/answers"
-    $config_template        =   'answers'
+    $path                  =   '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin'
+    $config_file           =   "${bugzilla_target_dir}/bugzilla/answers"
+    $config_template       =   'answers'
 
     if ! defined(File["${bugzilla_target_dir}/bugzilla/localconfig"]) {
       file { "${bugzilla_target_dir}/bugzilla/localconfig":
@@ -52,20 +52,19 @@
         owner     =>   root,
         group     =>   www-data,
         mode      =>   '0644',
-        content   =>   file("/etc/puppet/modules/bugzilla/files/localconfig"),
-        before    =>   File[$config_file],
+        content   =>   file("/etc/puppet/modules/modus_bugzilla/files/localconfig"),
+        before    =>   File["${config_file}"],
       }
     }
 
     # ensures that the answer file for bugzilla to be configured is present and fills it with the corresponding template
-    if ! defined(File[$config_file]) {
-      file { $config_file:
+    if ! defined(File["${config_file}"]) {
+      file { "${config_file}":
         ensure    =>   present,
         owner     =>   root,
         group     =>   www-data,
         mode      =>   '0644',
-        content   =>   template("bugzilla/${config_template}.erb"),
-        #notify    =>   Exec["perl checksetup.pl ${config_file}"],
+        content   =>   template("modus_bugzilla/${config_template}.erb"),
       }
     }
 
@@ -77,7 +76,7 @@
       group         =>   www-data,
       logoutput     =>   true,
       refreshonly   =>   true,
-      subscribe     =>   File[$config_file],
+      subscribe     =>   File["${config_file}"],
     }
   }
   # class definition - end

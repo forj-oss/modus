@@ -15,7 +15,7 @@
   # this module triggers all the scripts needed to install bugzilla
 
   # class definition - start
-  class bugzilla {
+  class modus_bugzilla {
 
     # ensures that the directory for bugzilla to be installed is present
     if ! defined(File['/usr/local/bugzilla']) {
@@ -27,26 +27,28 @@
     }
 
     # classes to be instantiated
-    include bugzilla::perl_package
-    include bugzilla::mysql_server_package
-    include bugzilla::httpd_package
-    include bugzilla::git_package
+    include modus_bugzilla::perl_package
+    include modus_bugzilla::mysql_server_package
+    include modus_bugzilla::httpd_package
+    include modus_bugzilla::git_package
 
-    class { 'bugzilla::bugzilla_package':
-      require   =>   File['/usr/local/bugzilla'],
+    class { 'modus_bugzilla::bugzilla_package':
+      package_type      =>   'branch',
+      package_version   =>   '4.4',
+      require           =>   File['/usr/local/bugzilla'],
     }
-    class { 'bugzilla::perl_modules_package':
-      option    =>   'required',
-      require   =>   Class['bugzilla::bugzilla_package'],
+    class { 'modus_bugzilla::perl_modules_package':
+      install_option   =>   'required',
+      require          =>   Class['modus_bugzilla::bugzilla_package'],
     }
-    class { 'bugzilla::mysql_server_config':
-      require   =>   Class['bugzilla::perl_modules_package'],
+    class { 'modus_bugzilla::mysql_server_config':
+      require   =>   Class['modus_bugzilla::perl_modules_package'],
     }
-    class { 'bugzilla::bugzilla_config':
-      require   =>   Class['bugzilla::mysql_server_config'],
+    class { 'modus_bugzilla::bugzilla_config':
+      require   =>   Class['modus_bugzilla::mysql_server_config'],
     }
-    class { 'bugzilla::httpd_config':
-      require   =>   Class['bugzilla::bugzilla_config'],
+    class { 'modus_bugzilla::httpd_config':
+      require   =>   Class['modus_bugzilla::bugzilla_config'],
     }
   }
   # class definition - end
