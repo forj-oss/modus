@@ -17,33 +17,21 @@
   # class definition - start
   class modus_bugzilla::bugzilla_package (
 
-    $package_type          =   undef,
-    $package_version       =   undef,
-    $bugzilla_target_dir   =   '/usr/local',
-  ){
+    $package_revision      =   $modus_bugzilla::bugzilla_params::package_revision,
+    $bugzilla_target_dir   =   $modus_bugzilla::bugzilla_params::bugzilla_target_dir,
+  ) inherits modus_bugzilla::bugzilla_params {
 
     # class required for this module to work
     require modus_bugzilla::git_package
 
-    # class variables
-    $path   =   '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin'
-
-    if $package_type == 'branch'
-    {
-      $bugzilla_package_clone   =   "git clone --branch ${package_version} http://git.mozilla.org/bugzilla/bugzilla"
-    }
-    elsif $package_type == 'tag'
-    {
-      $bugzilla_package_clone   =   "git clone --branch bugzilla-${package_version} http://git.mozilla.org/bugzilla/bugzilla"
-    }
-
-    # bugzilla package cloning
-    exec { "${bugzilla_package_clone}":
-      path      =>   $path,
-      cwd       =>   "${bugzilla_target_dir}",
-      user      =>   root,
-      group     =>   www-data,
-      creates   =>   "${bugzilla_target_dir}/bugzilla/index.cgi",
+    vcsrepo { "${bugzilla_target_dir}":
+      ensure     =>   present,
+      provider   =>   git,
+      source     =>   'http://git.mozilla.org/bugzilla/bugzilla',
+      revision   =>   $package_revision,
+      #user       =>   root,
+      user       =>   www-data,
+      group      =>   www-data,
     }
   }
   # class definition - end

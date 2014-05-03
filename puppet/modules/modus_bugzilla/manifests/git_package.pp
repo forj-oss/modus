@@ -12,29 +12,19 @@
   #   See the License for the specific language governing permissions and
   #   limitations under the License.
 
-  # module designed to install and set up the latest git package, this is done through ppa repositories
+  # module designed to install and set up the latest git package
 
   # class definition - start
   class modus_bugzilla::git_package (
 
     $git                   =   'git',
-    $git_package_version   =   'latest',
+    $git_package_version   =   'latest',    
   ){
-
-    # class variable
-    $git_ppa   =   'ppa:git-core/ppa'
-
-    # instantiates puppetlabs-apt module for managing apt command
-    class { '::apt': }
-
-    # creates ppa repository for latest git package to be installed
-    ::apt::ppa { "${git_ppa}": }
 
     # git package installation
     if ! defined(Package["${git}"]) {
       package { "${git}":
-        ensure    =>   $git_package_version,
-        require   =>   Apt::Ppa["${git_ppa}"],
+        ensure   =>   $git_package_version,
       }
     }
   }

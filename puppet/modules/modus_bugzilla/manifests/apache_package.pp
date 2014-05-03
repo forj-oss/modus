@@ -15,7 +15,7 @@
   # module designed to install and set up the latest apache package, this is done through puppetlabs-apache module
 
   # class definition - start
-  class modus_bugzilla::httpd_package {
+  class modus_bugzilla::apache_package {
 
     # apache package installation and set up with mod_heaers and mod_expires enabled
     include ::apache

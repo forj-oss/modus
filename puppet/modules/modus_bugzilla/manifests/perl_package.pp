@@ -12,7 +12,7 @@
   #   See the License for the specific language governing permissions and
   #   limitations under the License.
 
-  # module designed to install the latest perl, pmtools and cpanminus packages
+  # module designed to install the latest perl package
 
   # class definition - start
   class modus_bugzilla::perl_package (

@@ -21,33 +21,32 @@
     if ! defined(File['/usr/local/bugzilla']) {
       file { '/usr/local/bugzilla':
         ensure   =>   directory,
-        owner    =>   root,
+        #owner    =>   root,
+        owner    =>   www-data,
         group    =>   www-data,
       }
     }
 
     # classes to be instantiated
     include modus_bugzilla::perl_package
-    include modus_bugzilla::mysql_server_package
-    include modus_bugzilla::httpd_package
+    include modus_bugzilla::mysql_package
+    include modus_bugzilla::apache_package
     include modus_bugzilla::git_package
 
     class { 'modus_bugzilla::bugzilla_package':
-      package_type      =>   'branch',
-      package_version   =>   '4.4',
-      require           =>   File['/usr/local/bugzilla'],
+      require   =>   File['/usr/local/bugzilla'],
     }
     class { 'modus_bugzilla::perl_modules_package':
       install_option   =>   'required',
       require          =>   Class['modus_bugzilla::bugzilla_package'],
     }
-    class { 'modus_bugzilla::mysql_server_config':
+    class { 'modus_bugzilla::mysql_config':
       require   =>   Class['modus_bugzilla::perl_modules_package'],
     }
     class { 'modus_bugzilla::bugzilla_config':
-      require   =>   Class['modus_bugzilla::mysql_server_config'],
+      require   =>   Class['modus_bugzilla::mysql_config'],
     }
-    class { 'modus_bugzilla::httpd_config':
+    class { 'modus_bugzilla::apache_config':
       require   =>   Class['modus_bugzilla::bugzilla_config'],
     }
   }

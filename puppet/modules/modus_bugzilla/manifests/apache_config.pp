@@ -15,17 +15,18 @@
   # module designed to interact with apache through puppetlabs-apache module in order to create a vhost for bugzilla to work with
 
   # class definition - start
-  class modus_bugzilla::httpd_config {
+  class modus_bugzilla::apache_config {
 
     # apache vhost creation and set up
     ::apache::vhost { 'localhost':
       port            =>   '3000',
-      docroot         =>   '/usr/local/bugzilla/',
-      docroot_owner   =>   'root',
+      docroot         =>   '/usr/local/bugzilla',
+      #docroot_owner   =>   'root',
+      docroot_owner   =>   'www-data',
       docroot_group   =>   'www-data',
       directories     =>   [
           {
-            path          =>   '/usr/local/bugzilla/',
+            path          =>   '/usr/local/bugzilla',
             options       =>   ['Indexes', '+ExecCGI', 'FollowSymLinks','MultiViews'],
             addhandlers   =>   [{ handler => 'cgi-script', extensions => ['.cgi']}],
           },

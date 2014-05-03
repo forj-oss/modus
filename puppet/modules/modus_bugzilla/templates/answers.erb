@@ -14,6 +14,7 @@
   #   limitations under the License.
   %>
 
+  <%# local config variables%>
   $answer{'create_htaccess'} = <%=@create_htaccess ? 1 : 0 %>;
   $answer{'webservergroup'} = '<%=@webservergroup%>';
   $answer{'use_suexec'} = <%=@use_suexec ? 1 : 0 %>;
@@ -30,9 +31,15 @@
   $answer{'interdiffbin'} = '<%=@interdiffbin%>';
   $answer{'diffpath'} = '<%=@diffpath%>';
   $answer{'site_wide_secret'} = '<%=@site_wide_secret%>';
+
+  <%# bugzilla optional parameters%>
+  $answer{'mail_delivery_method'} = '<%=@mail_delivery_method%>';
+  $answer{'urlbase'} = '<%=@urlbase%>';
+
+  <%# bugzilla administrator information%>
   $answer{'ADMIN_EMAIL'} = '<%=@admin_email%>';
   $answer{'ADMIN_PASSWORD'} = '<%=@admin_password%>';
   $answer{'ADMIN_REALNAME'} = '<%=@admin_realname%>';
-  $answer{'NO_PAUSE'} = <%=@no_pause ? 1 : 0 %>;
-  $answer{'SMTP_SERVER'} = '<%=@smtp_server%>';
 
+  <%# bugzilla extra parameters%>
+  $answer{'NO_PAUSE'} = <%=@no_pause ? 1 : 0 %>;
