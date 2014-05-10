@@ -15,28 +15,13 @@
   # module designed to verify tomcat service
 
   # class definition - start
-  class modus_tomcat::tomcat_service (
+  class modus_tomcat::tomcat_service
+  inherits modus_tomcat::tomcat_params {
 
-    $tomcat_autodeploy_dir   =   $modus_tomcat::tomcat_service::tomcat_autodeploy_dir,
-    $tomcat_service          =   $modus_tomcat::tomcat_service::tomcat_service,
-    $tomcat_staging_dir      =   $modus_tomcat::tomcat_service::tomcat_staging_dir,
-  ) inherits modus_tomcat::tomcat_params {
-
-    # class required for this module to work
-    require modus_tomcat::tomcat_package
-
-    # verify if postfix service is running
+    # verify if tomcat service is running
     service { "${tomcat_service}":
       ensure   =>   running,
       enable   =>   true,
-    }
-
-    file { "${tomcat_autodeploy_dir}":
-      ensure   =>   directory,
-    }
-
-    file { "${tomcat_staging_dir}":
-      ensure   =>   directory,
     }
   }
   # class definition - end

@@ -12,7 +12,7 @@
   #   See the License for the specific language governing permissions and
   #   limitations under the License.
 
-  # module designed to install and set up the latest tomcat package #, this is done through camptocamp-tomcat module
+  # module designed to install and set up the latest tomcat package
 
   # class definition - start
   class modus_tomcat::tomcat_package

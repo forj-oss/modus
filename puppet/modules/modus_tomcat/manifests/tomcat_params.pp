@@ -32,5 +32,26 @@
     $tomcat_staging_dir        =   "/var/lib/tomcat${tomcat_package_version}/staging"
     $tomcat_user               =   "tomcat${tomcat_package_version}"
     $tomcat_user_homedir       =   "/usr/share/tomcat${tomcat_package_version}"
+    $tomcat_target_dir         =   "/etc/tomcat${tomcat_package_version}"
+    $config_template           =   'tomcat_users'
+    $config_file               =   "${tomcat_target_dir}/tomcat-users.xml"
+
+    #$tomcat_roles              =   [ 'manager-gui', 'manager-script', 'manager-jmx', 'manager-status' ]
+    $role_manager_gui          =   'manager-gui'
+    $role_manager_script       =   'manager-script'
+    $role_manager_jmx          =   'manager-jmx'
+    $role_manager_status       =   'manager-status'
+
+    #$tomcat_users              =   [ 'admin', 'tomcat', 'script','jmx' ]
+    $user_admin                =   'admin'
+    $user_tomcat               =   'tomcat'
+    $user_script               =   'script'
+    $user_jmx                  =   'jmx'
+
+    #$tomcat_pass               =   [ 'admin', 'tomcat', 'script','jmx' ]
+    $pass_admin                =   'admin'
+    $pass_tomcat               =   'tomcat'
+    $pass_script               =   'script'
+    $pass_jmx                  =   'jmx'
   }
   # class definition - end

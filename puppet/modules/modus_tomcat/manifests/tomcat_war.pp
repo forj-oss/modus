@@ -12,12 +12,25 @@
   #   See the License for the specific language governing permissions and
   #   limitations under the License.
 
-  # this module triggers all the scripts needed to install tomcat
+  # module designed to deploy applications through war files in tomcat
 
   # class definition - start
-  class modus_tomcat {
+  class modus_tomcat::tomcat_war (
 
-    include modus_tomcat::tomcat_package
-    include modus_tomcat::tomcat_config
+    $app_name          =   undef,
+    $target_war_file   =   undef,
+  ) inherits modus_tomcat::tomcat_params {
+
+    # class required to refresh tomcat service
+    include modus_tomcat::tomcat_service
+
+    $tomcat_deploy_war   =   "${tomcat_autodeploy_dir}/${app_name}.war"
+
+    # creates a symlink to the original war file and deploy scm-manager in tomcat
+    file { "${tomcat_deploy_war}":
+      ensure   =>   link,
+      target   =>   $target_war_file,
+      notify   =>   Service["${tomcat_service}"],
+    }
   }
   # class definition - end

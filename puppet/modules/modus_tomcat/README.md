@@ -14,7 +14,7 @@
 
 ##Overview
 
-Module for tomcat installation.
+Module for Tomcat installation.
 
 ##Module Description
 
