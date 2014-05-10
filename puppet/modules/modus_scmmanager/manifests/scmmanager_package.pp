@@ -15,14 +15,11 @@
   # module designed to install and set up the latest scm-manager package
 
   # class definition - start
-  class modus_scmmanager::scmmanager_package (
-
-    $scmmanager_package_revision   =   $modus_scmmanager::scmmanager_params::scmmanager_package_revision,
-    $scmmanager_target_dir         =   $modus_scmmanager::scmmanager_params::scmmanager_target_dir,
-  ) inherits modus_scmmanager::scmmanager_params {
+  class modus_scmmanager::scmmanager_package
+  inherits modus_scmmanager::scmmanager_params {
 
     # class required for this module to work
-    require modus_git::git_package
+    require ::modus_git::git_package
 
     vcsrepo { "${scmmanager_target_dir}":
       ensure     =>   present,

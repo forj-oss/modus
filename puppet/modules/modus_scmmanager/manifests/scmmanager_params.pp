@@ -23,5 +23,7 @@
 
     $path                        =   '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin'
     $scmmanager_package_source   =   'https://bitbucket.org/sdorra/scm-manager'
+    $app_name                    =   'scm-manager'
+    $target_war_file             =   "${scmmanager_target_dir}/scm-webapp/target/scm-webapp.war"
   }
   # class definition - end

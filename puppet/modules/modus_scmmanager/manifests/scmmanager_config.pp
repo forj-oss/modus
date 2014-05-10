@@ -30,5 +30,11 @@
       logoutput     =>   true,
       timeout       =>   0,
     }
+
+    class { '::modus_tomcat::tomcat_war':
+      app_name          =>   $app_name,
+      target_war_file   =>   $target_war_file,
+      require           =>   Exec['mvn clean install'],
+    }
   }
   # class definition - end
