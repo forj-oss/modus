@@ -33,6 +33,7 @@
     $tomcat_user               =   "tomcat${tomcat_package_version}"
     $tomcat_user_homedir       =   "/usr/share/tomcat${tomcat_package_version}"
     $tomcat_target_dir         =   "/etc/tomcat${tomcat_package_version}"
+    $tomcat_share_dir          =   "/usr/share/tomcat${tomcat_package_version}"
     $config_template           =   'tomcat_users'
     $config_file               =   "${tomcat_target_dir}/tomcat-users.xml"
 

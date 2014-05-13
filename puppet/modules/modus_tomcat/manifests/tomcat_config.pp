@@ -32,6 +32,14 @@
       ensure   =>   directory,
     }
 
+    file { "${tomcat_share_dir}":
+      ensure    =>   directory,
+      replace   =>   false,
+      owner     =>   tomcat7,
+      group     =>   tomcat7,
+      notify    =>   Service["${tomcat_service}"],
+    }
+
     # ensures that the tomcat-users file for tomcat manager to be configured is present and fills it with the corresponding template
     file { "${config_file}":
       ensure    =>   present,
