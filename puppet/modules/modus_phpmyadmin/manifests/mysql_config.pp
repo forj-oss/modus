@@ -12,18 +12,17 @@
   #   See the License for the specific language governing permissions and
   #   limitations under the License.
 
-  # this module triggers all the scripts needed to install phpmyadmin
+  # module designed to interact with mysql through puppetlabs-mysql module in order to create a new database with its user for bugzilla to work with
 
   # class definition - start
-  class modus_phpmyadmin {
+  class modus_phpmyadmin::mysql_config {
 
-    include ::modus_mysql
-    include ::modus_apache
-    include modus_phpmyadmin::phpmyadmin_package
-
-    class { 'modus_phpmyadmin::mysql_config': }
-    class { 'modus_phpmyadmin::phpmyadmin_config':
-      require   =>   Class['modus_phpmyadmin::mysql_config'],
+    # creates "phpmyadmin" database and user on localhost and manage them within mysql
+    ::mysql::db { 'phpmyadmin':
+      user       =>   'phpmyadmin',
+      password   =>   'letmein',
+      host       =>   'localhost',
+      grant      =>   ['ALL'],
     }
   }
   # class definition - end

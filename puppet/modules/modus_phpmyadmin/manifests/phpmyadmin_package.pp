@@ -15,10 +15,8 @@
   # module designed to install and set up the latest phpmyadmin package
 
   # class definition - start
-  class modus_phpmyadmin::phpmyadmin_package (
-
-    $phpmyadmin_package_version   =   $modus_phpmyadmin::phpmyadmin_params::phpmyadmin_package_version,
-  ) inherits modus_phpmyadmin::phpmyadmin_params {
+  class modus_phpmyadmin::phpmyadmin_package
+  inherits modus_phpmyadmin::phpmyadmin_params {
 
     # phpmyadmin package installation
     if ! defined(Package["${package}"]) {

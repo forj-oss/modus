@@ -17,9 +17,30 @@
   # class definition - start
   class modus_phpmyadmin::phpmyadmin_params (
 
+    $dbc_install                  =   'true',
+    $dbc_upgrade                  =   'true',
+    $dbc_remove                   =   '',
+    $dbc_dbtype                   =   'mysql',
+    $dbc_dbuser                   =   'phpmyadmin',
+    $dbc_dbpass                   =   'letmein',
+    $dbc_dbserver                 =   '',
+    $dbc_dbport                   =   '',
+    $dbc_dbname                   =   'phpmyadmin',
+    $dbc_dbadmin                  =   'root',
+    $dbc_basepath                 =   '',
     $phpmyadmin_package_version   =   'latest',
+    $phpmyadmin_config_dir        =   '/etc/dbconfig-common',
+    $phpmyadmin_apache_dir        =   '/etc/phpmyadmin',
+    $phpmyadmin_link_dir          =   '/etc/apache2/conf.d',
   ){
 
-    $package   =   'phpmyadmin'
+    $path                            =   '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin'
+    $package                         =   'phpmyadmin'
+    $phpmyadmin_config_template      =   'phpmyadmin_conf'
+    $phpmyadmin_config_file          =   "${phpmyadmin_config_dir}/phpmyadmin.conf"
+    $phpmyadmin_apache_config_file   =   "${phpmyadmin_apache_dir}/apache.conf"
+    $phpmyadmin_link_config_file     =   "${phpmyadmin_link_dir}/phpmyadmin.conf"
+    $phpmyadmin_db_config_file       =   "${phpmyadmin_apache_dir}/config-db.php"
+    $phpmyadmin_db_config_template   =   'config_db_php'
   }
   # class definition - end
