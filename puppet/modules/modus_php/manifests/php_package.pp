@@ -26,18 +26,34 @@
     }
 
     # php apache lib package installation
-    if ! defined(Package["${apache_lib_package}"]) {
-      package { "${apache_lib_package}":
+    if ! defined(Package["${php_apache_lib_package}"]) {
+      package { "${php_apache_lib_package}":
         ensure    =>   installed,
-        require   => Package["${package}"],
+        require   =>   Package["${package}"],
       }
     }
 
     # php client package installation
-    if ! defined(Package["${cli_package}"]) {
-      package { "${cli_package}":
+    if ! defined(Package["${php_cli_package}"]) {
+      package { "${php_cli_package}":
         ensure    =>   installed,
-        require   => Package["${package}"],
+        require   =>   Package["${package}"],
+      }
+    }
+
+    # php mysql package installation
+    if ! defined(Package["${php_mysql_package}"]) {
+      package { "${php_mysql_package}":
+        ensure    =>   installed,
+        require   =>   Package["${package}"],
+      }
+    }
+
+    # php mcrypt package installation
+    if ! defined(Package["${php_mcrypt_package}"]) {
+      package { "${php_mcrypt_package}":
+        ensure    =>   installed,
+        require   =>   Package["${package}"],
       }
     }
   }

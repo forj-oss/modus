@@ -20,8 +20,10 @@
     $php_package_version   =   '5',
   ){
 
-    $package              =   "php${php_package_version}"
-    $apache_lib_package   =   "libapache2-mod-php${php_package_version}"
-    $cli_package          =   "php${php_package_version}-cli"
+    $package                  =   "php${php_package_version}"
+    $php_cli_package          =   "php${php_package_version}-cli"
+    $php_mysql_package        =   "php${php_package_version}-mysql"
+    $php_mcrypt_package       =   "php${php_package_version}-mcrypt"
+    $php_apache_lib_package   =   "libapache2-mod-php${php_package_version}"
   }
   # class definition - end
