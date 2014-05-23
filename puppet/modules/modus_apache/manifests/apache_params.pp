@@ -12,19 +12,15 @@
   #   See the License for the specific language governing permissions and
   #   limitations under the License.
 
-  # module designed to install and set up the latest apache package, this is done through puppetlabs-apache module
+  # module designed to set up the parameters needed for apache package
 
   # class definition - start
-  class modus_apache::apache_package {
+  class modus_apache::apache_params (
 
-    # apache package installation and set up with mod_heaers, mod_expires and mod_php enabled
-    class { '::apache':
-      purge_configs   =>   'false',
-      mpm_module      =>   'prefork',
-    }
+    $apache_package_version   =   '2',
+  ){
 
-    include ::apache::mod::headers
-    include ::apache::mod::expires
-    include ::apache::mod::php
+    $package          =   "apache${apache_package_version}"
+    $apache_service   =   "apache${apache_package_version}"
   }
   # class definition - end
