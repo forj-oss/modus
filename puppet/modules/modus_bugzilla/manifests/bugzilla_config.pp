@@ -15,14 +15,17 @@
   # module designed to install and set up bugzilla
 
   # class definition - start
-  class modus_bugzilla::bugzilla_config 
-  inherits modus_bugzilla::bugzilla_params {
+  class modus_bugzilla::bugzilla_config (
+
+    $admin_email      =   $modus_bugzilla::bugzilla_params::admin_email,
+    $admin_password   =   $modus_bugzilla::bugzilla_params::admin_password,
+    $admin_realname   =   $modus_bugzilla::bugzilla_params::admin_realname,
+  ) inherits modus_bugzilla::bugzilla_params {
 
     # ensures that the answer file for bugzilla to be configured is present and fills it with the corresponding template
     if ! defined(File["${config_file}"]) {
       file { "${config_file}":
         ensure    =>   present,
-        #owner     =>   root,
         owner     =>   www-data,
         group     =>   www-data,
         mode      =>   '0644',
@@ -34,7 +37,6 @@
     exec { "perl checksetup.pl ${config_file}":
       path          =>   $path,
       cwd           =>   $bugzilla_target_dir,
-      #user          =>   root,
       user          =>   www-data,
       group         =>   www-data,
       logoutput     =>   true,

@@ -15,21 +15,17 @@
   # module designed to provide bugzilla package, this is done through git
 
   # class definition - start
-  class modus_bugzilla::bugzilla_package (
-
-    $package_revision      =   $modus_bugzilla::bugzilla_params::package_revision,
-    $bugzilla_target_dir   =   $modus_bugzilla::bugzilla_params::bugzilla_target_dir,
-  ) inherits modus_bugzilla::bugzilla_params {
+  class modus_bugzilla::bugzilla_package
+  inherits modus_bugzilla::bugzilla_params {
 
     # class required for this module to work
-    require modus_bugzilla::git_package
+    require ::modus_git::git_package
 
     vcsrepo { "${bugzilla_target_dir}":
       ensure     =>   present,
       provider   =>   git,
-      source     =>   'http://git.mozilla.org/bugzilla/bugzilla',
-      revision   =>   $package_revision,
-      #user       =>   root,
+      source     =>   $bugzilla_package_source,
+      revision   =>   $bugzilla_package_revision,
       user       =>   www-data,
       group      =>   www-data,
     }

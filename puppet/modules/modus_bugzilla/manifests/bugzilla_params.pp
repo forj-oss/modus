@@ -17,34 +17,36 @@
   # class definition - start
   class modus_bugzilla::bugzilla_params (
 
-    $create_htaccess        =   true,
-    $webservergroup         =   'www-data',
-    $use_suexec             =   false,
-    $db_driver              =   'mysql',
-    $db_host                =   'localhost',
-    $db_name                =   'bugzilla_db',
-    $db_user                =   'bugzilla_user',
-    $db_pass                =   'letmein',
-    $db_port                =   0,
-    $db_sock                =   '',
-    $db_check               =   false,
-    $index_html             =   false,
-    $cvsbin                 =   '/usr/bin/cvs',
-    $interdiffbin           =   '/usr/bin/interdiff',
-    $diffpath               =   '/usr/bin',
-    $site_wide_secret       =   '',
-    $mail_delivery_method   =   'smtp',
-    $admin_email            =   undef,
-    $admin_password         =   'letmein',
-    $admin_realname         =   undef,
-    $no_pause               =   true,
-    $smtp_server            =   'localhost',
-    $package_revision       =   '4.4',
-    $bugzilla_target_dir    =   '/usr/local/bugzilla',
+    $create_htaccess             =   true,
+    $webservergroup              =   'www-data',
+    $use_suexec                  =   false,
+    $db_driver                   =   'mysql',
+    $db_host                     =   'localhost',
+    $db_name                     =   'bugzilla',
+    $db_user                     =   'bugzilla',
+    $db_pass                     =   'letmein',
+    $db_port                     =   0,
+    $db_sock                     =   '',
+    $db_check                    =   false,
+    $index_html                  =   false,
+    $cvsbin                      =   '/usr/bin/cvs',
+    $interdiffbin                =   '/usr/bin/interdiff',
+    $diffpath                    =   '/usr/bin',
+    $site_wide_secret            =   '',
+    $mail_delivery_method        =   'smtp',
+    $admin_email                 =   undef,
+    $admin_password              =   undef,
+    $admin_realname              =   undef,
+    $no_pause                    =   true,
+    $smtp_server                 =   'localhost',
+    $bugzilla_package_revision   =   '4.4',
+    $bugzilla_target_dir         =   '/usr/local/bugzilla',
   ){
 
-    $urlbase           =   "http://${ec2_public_ipv4}:3000/"
-    $path              =   '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin'
-    $config_template   =   'answers'
-    $config_file       =   "${bugzilla_target_dir}/${config_template}"
+    $urlbase                   =   "http://${ec2_public_ipv4}:3000/"
+    $path                      =   '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin'
+    $config_template           =   'answers'
+    $config_file               =   "${bugzilla_target_dir}/${config_template}"
+    $bugzilla_package_source   =   'http://git.mozilla.org/bugzilla/bugzilla'
   }
+  # class definition - end

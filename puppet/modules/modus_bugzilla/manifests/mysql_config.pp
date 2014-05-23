@@ -17,12 +17,12 @@
   # class definition - start
   class modus_bugzilla::mysql_config {
 
-    # creates "bugzilla_db" and "bugzilla_user" on localhost and manage them within mysql
-    ::mysql::db { 'bugzilla_db':
-      user       =>   'bugzilla_user',
+    # creates "bugzilla" db and user on localhost and manage them within mysql
+    ::mysql::db { 'bugzilla':
+      user       =>   'bugzilla',
       password   =>   'letmein',
       host       =>   'localhost',
-      grant      =>   ['SELECT', 'INSERT', 'UPDATE', 'DELETE', 'INDEX', 'ALTER', 'CREATE', 'LOCK TABLES', 'CREATE TEMPORARY TABLES', 'DROP', 'REFERENCES'],
+      grant      =>   ['ALL'],
     }
   }
   # class definition - end

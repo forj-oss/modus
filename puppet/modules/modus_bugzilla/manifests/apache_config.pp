@@ -21,7 +21,6 @@
     ::apache::vhost { 'localhost':
       port            =>   '3000',
       docroot         =>   '/usr/local/bugzilla',
-      #docroot_owner   =>   'root',
       docroot_owner   =>   'www-data',
       docroot_group   =>   'www-data',
       directories     =>   [
