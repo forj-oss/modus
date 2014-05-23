@@ -18,5 +18,6 @@
   class modus_mysql {
 
     include modus_mysql::mysql_package
+    include modus_mysql::mysql_config
   }
   # class definition - end
