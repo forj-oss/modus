@@ -15,10 +15,8 @@
   # module designed to install and set up the latest phpldapadmin package
 
   # class definition - start
-  class modus_phpldapadmin::phpldapadmin_package (
-
-    $phpldapadmin_package_version   =   $modus_phpldapadmin::phpldapadmin_params::phpldapadmin_package_version,
-  ) inherits modus_phpldapadmin::phpldapadmin_params {
+  class modus_phpldapadmin::phpldapadmin_package
+  inherits modus_phpldapadmin::phpldapadmin_params {
 
     # phpldapadmin package installation
     if ! defined(Package["${package}"]) {

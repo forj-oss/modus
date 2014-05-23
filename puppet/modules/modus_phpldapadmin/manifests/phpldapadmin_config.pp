@@ -12,14 +12,20 @@
   #   See the License for the specific language governing permissions and
   #   limitations under the License.
 
-  # this module triggers all the scripts needed to install phpldapadmin
+  # module designed to set up phpldapadmin
 
   # class definition - start
-  class modus_phpldapadmin {
+  class modus_phpldapadmin::phpldapadmin_config
+  inherits modus_phpldapadmin::phpldapadmin_params {
 
-    #include ::modus_mysql
-    include ::modus_apache
-    include modus_phpldapadmin::phpldapadmin_package
-    include modus_phpldapadmin::phpldapadmin_config
+    # class required for this module to work
+    require modus_phpldapadmin::phpldapadmin_package
+
+    # creates a symlink from 'apache.conf' file to 'phpldapadmin.conf' for phpldapadmin to work with apache
+    file { "${phpldapadmin_link_config_file}":
+      ensure   =>   link,
+      target   =>   $phpldapadmin_apache_config_file,
+      notify   =>   Class['::apache::service'],
+    }
   }
   # class definition - end

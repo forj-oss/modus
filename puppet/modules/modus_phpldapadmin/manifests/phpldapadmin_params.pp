@@ -18,8 +18,12 @@
   class modus_phpldapadmin::phpldapadmin_params (
 
     $phpldapadmin_package_version   =   'latest',
+    $phpldapadmin_apache_dir        =   '/etc/phpldapadmin',
+    $phpldapadmin_link_dir          =   '/etc/apache2/conf.d',
   ){
 
-    $package   =   'phpldapadmin'
+    $package                           =   'phpldapadmin'
+    $phpldapadmin_apache_config_file   =   "${phpldapadmin_apache_dir}/apache.conf"
+    $phpldapadmin_link_config_file     =   "${phpldapadmin_link_dir}/phpldapadmin.conf"
   }
   # class definition - end
