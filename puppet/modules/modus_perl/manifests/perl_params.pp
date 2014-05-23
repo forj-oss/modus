@@ -19,8 +19,8 @@
 
     $perl                      =   'perl',
     $perl_packages_version     =   'latest',
-    $install_option            =   undef,
-    $perl_modules_target_dir   =   undef,
+    $install_option            =   'required',
+    $perl_modules_target_dir   =   '/usr/local/bugzilla',
   ){
 
     $path           =   '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin'

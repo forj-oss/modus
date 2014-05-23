@@ -15,8 +15,10 @@
   # module designed to install and set up the latest versions of the perl modules required for bugzilla, this is done through the install-module.pl script provided by bugzilla
 
   # class definition - start
-  class modus_perl::perl_modules_package
-  inherits modus_perl::perl_params {
+  class modus_perl::perl_modules_package (
+
+    $install_option   =   $modus_perl::perl_params::install_option,
+  ) inherits modus_perl::perl_params {
 
     # class required for this module to work
     require modus_perl::perl_package
@@ -30,7 +32,7 @@
         path        =>   $path,
         cwd         =>   $perl_modules_target_dir,
         logoutput   =>   true,
-        user        =>   root,
+        user        =>   www-data,
         group       =>   www-data,
         timeout     =>   0,
       }
@@ -38,7 +40,7 @@
         path        =>   $path,
         cwd         =>   $perl_modules_target_dir,
         logoutput   =>   true,
-        user        =>   root,
+        user        =>   www-data,
         group       =>   www-data,
         timeout     =>   0,
       }
@@ -46,7 +48,7 @@
         path        =>   $path,
         cwd         =>   $perl_modules_target_dir,
         logoutput   =>   true,
-        user        =>   root,
+        user        =>   www-data,
         group       =>   www-data,
         timeout     =>   0,
       }
@@ -54,7 +56,7 @@
         path        =>   $path,
         cwd         =>   $perl_modules_target_dir,
         logoutput   =>   true,
-        user        =>   root,
+        user        =>   www-data,
         group       =>   www-data,
         timeout     =>   0,
       }
@@ -62,7 +64,7 @@
         path        =>   $path,
         cwd         =>   $perl_modules_target_dir,
         logoutput   =>   true,
-        user        =>   root,
+        user        =>   www-data,
         group       =>   www-data,
         timeout     =>   0,
       }
@@ -70,7 +72,7 @@
         path        =>   $path,
         cwd         =>   $perl_modules_target_dir,
         logoutput   =>   true,
-        user        =>   root,
+        user        =>   www-data,
         group       =>   www-data,
         timeout     =>   0,
       }
@@ -78,7 +80,7 @@
         path        =>   $path,
         cwd         =>   $perl_modules_target_dir,
         logoutput   =>   true,
-        user        =>   root,
+        user        =>   www-data,
         group       =>   www-data,
         timeout     =>   0,
       }
@@ -86,7 +88,7 @@
         path        =>   $path,
         cwd         =>   $perl_modules_target_dir,
         logoutput   =>   true,
-        user        =>   root,
+        user        =>   www-data,
         group       =>   www-data,
         timeout     =>   0,
       }
@@ -94,7 +96,7 @@
         path        =>   $path,
         cwd         =>   $perl_modules_target_dir,
         logoutput   =>   true,
-        user        =>   root,
+        user        =>   www-data,
         group       =>   www-data,
         timeout     =>   0,
       }
@@ -102,7 +104,7 @@
         path        =>   $path,
         cwd         =>   $perl_modules_target_dir,
         logoutput   =>   true,
-        user        =>   root,
+        user        =>   www-data,
         group       =>   www-data,
         timeout     =>   0,
       }
@@ -110,7 +112,7 @@
         path        =>   $path,
         cwd         =>   $perl_modules_target_dir,
         logoutput   =>   true,
-        user        =>   root,
+        user        =>   www-data,
         group       =>   www-data,
         timeout     =>   0,
       }
@@ -118,7 +120,7 @@
         path        =>   $path,
         cwd         =>   $perl_modules_target_dir,
         logoutput   =>   true,
-        user        =>   root,
+        user        =>   www-data,
         group       =>   www-data,
         timeout     =>   0,
       }
@@ -126,7 +128,7 @@
         path        =>   $path,
         cwd         =>   $perl_modules_target_dir,
         logoutput   =>   true,
-        user        =>   root,
+        user        =>   www-data,
         group       =>   www-data,
         timeout     =>   0,
       }
@@ -139,7 +141,7 @@
         path          =>   $path,
         cwd           =>   $perl_modules_target_dir,
         logoutput     =>   true,
-        user          =>   root,
+        user          =>   www-data,
         group         =>   www-data,
         refreshonly   =>   true,
         timeout       =>   0,
