@@ -17,6 +17,7 @@
   # class definition - start
   class modus_maven {
 
+    include ::modus_openjdk
     include modus_maven::maven_package
   }
   # class definition - end

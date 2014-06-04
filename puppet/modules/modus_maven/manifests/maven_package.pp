@@ -15,11 +15,11 @@
   # module designed to install and set up the latest maven package
 
   # class definition - start
-  class modus_maven::maven_package (
+  class modus_maven::maven_package
+  inherits modus_maven::maven_params {
 
-    $maven                   =   $modus_maven::maven_params::maven,
-    $maven_package_version   =   $modus_maven::maven_params::maven_package_version,
-  ) inherits modus_maven::maven_params {
+    # class required for this module to work
+    require ::modus_openjdk
 
     # maven package installation
     if ! defined(Package["${maven}"]) {
