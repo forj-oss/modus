@@ -18,6 +18,5 @@
   class modus_perl {
 
     include modus_perl::perl_package
-    include modus_perl::perl_modules_package
   }
   # class definition - end
