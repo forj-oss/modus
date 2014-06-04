@@ -15,16 +15,13 @@
   # module designed to install and set up the latest postfix package
 
   # class definition - start
-  class modus_postfix::postfix_package (
-
-    $package           =   $modus_postfix::postfix_params::package,
-    $package_version   =   $modus_postfix::postfix_params::package_version,
-  ) inherits modus_postfix::postfix_params {
+  class modus_postfix::postfix_package
+  inherits modus_postfix::postfix_params {
 
     # postfix package installation
-    if ! defined(Package["${package}"]) {
-      package { "${package}":
-        ensure   =>   $package_version,
+    if ! defined(Package["${postfix}"]) {
+      package { "${postfix}":
+        ensure   =>   $postfix_package_version,
       }
     }
   }

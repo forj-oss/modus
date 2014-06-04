@@ -17,21 +17,21 @@
   # class definition - start
   class modus_postfix::postfix_params (
 
-    $package               =   'postfix',
-    $package_version       =   'latest',
-    $postfix_target_dir    =   '/etc/postfix',
-    $myhostname            =    $fqdn,
-    $alias_maps            =   '/etc/aliases',
-    $alias_database        =   '/etc/aliases',
-    $myorigin              =   '/etc/mailname',
-    $relayhost             =   '',
-    $mynetworks            =   "127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128",
-    $mailbox_size_limit    =   0,
-    $recipient_delimiter   =   '+',
-    $inet_interfaces       =   'all',
+    $postfix                   =   'postfix',
+    $postfix_package_version   =   'latest',
+    $postfix_target_dir        =   '/etc/postfix',
+    $myhostname                =    $fqdn,
+    $alias_maps                =   '/etc/aliases',
+    $alias_database            =   '/etc/aliases',
+    $myorigin                  =   '/etc/mailname',
+    $relayhost                 =   '',
+    $mynetworks                =   "127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128",
+    $mailbox_size_limit        =   0,
+    $recipient_delimiter       =   '+',
+    $inet_interfaces           =   'all',
   ){
 
-    $config_template   =   'main.cf'
+    $config_template   =   'main_cf'
     $config_file       =   "${postfix_target_dir}/${$config_template}"
     $mydestination     =   "${myhostname}, localhost.${domain}, , localhost"
   }

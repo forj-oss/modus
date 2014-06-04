@@ -15,16 +15,14 @@
   # module designed to verify postfix service
 
   # class definition - start
-  class modus_postfix::postfix_service (
-
-    $package   =   $modus_postfix::postfix_params::package,
-  ) inherits modus_postfix::postfix_params {
+  class modus_postfix::postfix_service
+  inherits modus_postfix::postfix_params {
 
     # class required for this module to work
     require modus_postfix::postfix_config
 
     # verify if postfix service is running
-    service { "${package}":
+    service { "${postfix}":
       ensure   =>   running,
       enable   =>   true,
     }
