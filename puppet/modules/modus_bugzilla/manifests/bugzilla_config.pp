@@ -22,6 +22,11 @@
     $admin_realname   =   $modus_bugzilla::bugzilla_params::admin_realname,
   ) inherits modus_bugzilla::bugzilla_params {
 
+    # classes required for this module to work
+    require ::modus_apache
+    require ::modus_mysql
+    require ::modus_perl
+
     # ensures that the answer file for bugzilla to be configured is present and fills it with the corresponding template
     if ! defined(File["${config_file}"]) {
       file { "${config_file}":

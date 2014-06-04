@@ -19,7 +19,7 @@
   inherits modus_bugzilla::bugzilla_params {
 
     # class required for this module to work
-    require ::modus_git::git_package
+    require ::modus_git
 
     vcsrepo { "${bugzilla_target_dir}":
       ensure     =>   present,

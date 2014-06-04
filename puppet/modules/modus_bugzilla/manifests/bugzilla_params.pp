@@ -24,7 +24,7 @@
     $db_host                     =   'localhost',
     $db_name                     =   'bugzilla',
     $db_user                     =   'bugzilla',
-    $db_pass                     =   'letmein',
+    $db_pass                     =   'bugzilla',
     $db_port                     =   0,
     $db_sock                     =   '',
     $db_check                    =   false,

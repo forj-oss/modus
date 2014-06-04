@@ -15,11 +15,14 @@
   # this module triggers all the scripts needed to install bugzilla
 
   # class definition - start
-  class modus_bugzilla {
+  class modus_bugzilla (
+
+    $bugzilla_target_dir   =   $modus_bugzilla::bugzilla_params::bugzilla_target_dir,
+  ) inherits modus_bugzilla::bugzilla_params {
 
     # ensures that the directory for bugzilla to be installed is present
-    if ! defined(File['/usr/local/bugzilla']) {
-      file { '/usr/local/bugzilla':
+    if ! defined(File["${bugzilla_target_dir}"]) {
+      file { "${bugzilla_target_dir}":
         ensure   =>   directory,
         owner    =>   www-data,
         group    =>   www-data,
@@ -27,13 +30,13 @@
     }
 
     # classes to be instantiated
-    include ::modus_perl::perl_package
-    include ::modus_mysql::mysql_package
-    include ::modus_apache::apache_package
-    include ::modus_git::git_package
+    include ::modus_apache
+    include ::modus_git 
+    include ::modus_mysql
+    include ::modus_perl
 
     class { 'modus_bugzilla::bugzilla_package':
-      require   =>   File['/usr/local/bugzilla'],
+      require   =>   File["${bugzilla_target_dir}"],
     }    
     class { '::modus_perl::perl_modules_package':
       require   =>   Class['modus_bugzilla::bugzilla_package'],
