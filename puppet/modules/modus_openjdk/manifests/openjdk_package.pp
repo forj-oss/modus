@@ -15,14 +15,33 @@
   # module designed to install and set up the latest openjdk package
 
   # class definition - start
-  class modus_openjdk::openjdk_package (
+  class modus_openjdk::openjdk_package
+  inherits modus_openjdk::openjdk_params {
 
-    $package   =   $modus_openjdk::openjdk_package::package,
-  ) inherits modus_openjdk::openjdk_params {
+    # openjdk jre default package installation
+    if ! defined(Package["${openjdk_default_jre_package}"]) {
+      package { "${openjdk_default_jre_package}":
+        ensure   =>   installed,
+      }
+    }
 
-    # openjdk package installation
-    if ! defined(Package["${package}"]) {
-      package { "${package}":
+    # openjdk jdk default package installation
+    if ! defined(Package["${openjdk_default_jdk_package}"]) {
+      package { "${openjdk_default_jdk_package}":
+        ensure   =>   installed,
+      }
+    }
+
+    # openjdk jre package installation
+    if ! defined(Package["${openjdk_jre_package}"]) {
+      package { "${openjdk_jre_package}":
+        ensure   =>   installed,
+      }
+    }
+
+    # openjdk jdk package installation
+    if ! defined(Package["${openjdk_jdk_package}"]) {
+      package { "${openjdk_jdk_package}":
         ensure   =>   installed,
       }
     }

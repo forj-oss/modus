@@ -21,6 +21,7 @@
     # class required for this module to work
     require modus_openjdk::openjdk_package
 
+    # set JAVA_HOME environment variable
     exec { "${java_environment}":
       path        =>   $path,
       logoutput   =>   true,
@@ -28,13 +29,21 @@
       group       =>   root,
     }
 
-    file { 'openjdk::link':
+    /*file { 'openjdk::link':
       ensure    =>   link,
       owner     =>   root,
       group     =>   root,
       path      =>   $java_path,
       target    =>   $java_target_dir,
       require   =>   Exec["${java_environment}"],
-    }
+    }*/
+
+    # set the desired java version as default
+    /*exec { "${java_set}":
+      path        =>   $path,
+      logoutput   =>   true,
+      user        =>   root,
+      group       =>   root,
+    }*/
   }
   # class definition - end

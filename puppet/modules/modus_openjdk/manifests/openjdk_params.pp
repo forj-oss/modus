@@ -17,13 +17,20 @@
   # class definition - start
   class modus_openjdk::openjdk_params (
 
-    $openjdk_package_version   =   '7',
+    $openjdk_default_package_version   =   '6',
+    $openjdk_package_version           =   '7',
   ){
 
-    $path               =   '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin'
-    $package            =   "openjdk-${openjdk_package_version}-jre"
-    $java_target_dir    =   "/usr/lib/jvm/java-${openjdk_package_version}-openjdk-amd64"
-    $java_path          =   '/usr/lib/jvm/default-java'
-    $java_environment   =   "echo JAVA_HOME=${java_target_dir} >> /etc/environment"
+    $path                          =   '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin'
+    $openjdk_default_jre_package   =   "openjdk-${openjdk_default_package_version}-jre"
+    $openjdk_default_jdk_package   =   "openjdk-${openjdk_default_package_version}-jdk"
+    $openjdk_jre_package           =   "openjdk-${openjdk_package_version}-jre"
+    $openjdk_jdk_package           =   "openjdk-${openjdk_package_version}-jdk"
+    $java_target_dir               =   "/usr/lib/jvm/java-${openjdk_default_package_version}-openjdk-amd64"
+    #$java_path                     =   '/usr/lib/jvm/default-java'
+    $java_environment              =   "echo JAVA_HOME=${java_target_dir} >> /etc/environment"
+
+    # set java 7 as default for the entire system
+    #$java_set              =   "update-java-alternatives --set java-1.${openjdk_package_version}.0-openjdk-amd64"
   }
   # class definition - end
