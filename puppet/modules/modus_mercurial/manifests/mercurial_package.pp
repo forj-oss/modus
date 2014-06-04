@@ -15,13 +15,8 @@
   # module designed to install and set up the latest mercurial package
 
   # class definition - start
-  class modus_mercurial::mercurial_package (
-
-    $mercurial                   =   $modus_mercurial::mercurial_params::mercurial,
-    $mercurial_package_version   =   $modus_mercurial::mercurial_params::mercurial_package_version,
-    $meld                        =   $modus_mercurial::mercurial_params::meld,
-    $meld_package_version        =   $modus_mercurial::mercurial_params::meld_package_version,
-  ) inherits modus_mercurial::mercurial_params {
+  class modus_mercurial::mercurial_package
+  inherits modus_mercurial::mercurial_params {
 
     # mercurial package installation
     if ! defined(Package["${mercurial}"]) {
