@@ -18,7 +18,10 @@
   class modus_phpmyadmin::phpmyadmin_config
   inherits modus_phpmyadmin::phpmyadmin_params {
 
-    # ensures that the config file for phpmyadmin to be is present
+    # class required for this module to work
+    require ::modus_apache
+
+    # ensures that the config file for phpmyadmin to be configured is present
     file { "${phpmyadmin_config_file}":
       ensure    =>   present,
       owner     =>   root,
@@ -26,7 +29,7 @@
       content   =>   template("modus_phpmyadmin/${phpmyadmin_config_template}.erb"),
     }
 
-    # ensures that the config file for phpmyadmin to be is present
+    # ensures that the config file for phpmyadmin db to be configured is present
     file { "${phpmyadmin_db_config_file}":
       ensure    =>   present,
       owner     =>   root,

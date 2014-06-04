@@ -19,9 +19,11 @@
 
     include ::modus_mysql
     include ::modus_apache
-    include modus_phpmyadmin::phpmyadmin_package
-
-    class { 'modus_phpmyadmin::mysql_config': }
+    
+    class { 'modus_phpmyadmin::phpmyadmin_package': }
+    class { 'modus_phpmyadmin::mysql_config': 
+      require   =>   Class['modus_phpmyadmin::phpmyadmin_package'],
+    }
     class { 'modus_phpmyadmin::phpmyadmin_config':
       require   =>   Class['modus_phpmyadmin::mysql_config'],
     }

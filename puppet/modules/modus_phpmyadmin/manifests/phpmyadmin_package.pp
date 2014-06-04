@@ -18,9 +18,12 @@
   class modus_phpmyadmin::phpmyadmin_package
   inherits modus_phpmyadmin::phpmyadmin_params {
 
+    # class required for this module to work (without this the "phpmyadmin" db won't be correctly created)
+    require ::modus_mysql
+
     # phpmyadmin package installation
-    if ! defined(Package["${package}"]) {
-      package { "${package}":
+    if ! defined(Package["${phpmyadmin}"]) {
+      package { "${phpmyadmin}":
         ensure   =>   $phpmyadmin_package_version,
       }
     }

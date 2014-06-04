@@ -22,7 +22,7 @@
     $dbc_remove                   =   '',
     $dbc_dbtype                   =   'mysql',
     $dbc_dbuser                   =   'phpmyadmin',
-    $dbc_dbpass                   =   'letmein',
+    $dbc_dbpass                   =   'phpmyadmin',
     $dbc_dbserver                 =   '',
     $dbc_dbport                   =   '',
     $dbc_dbname                   =   'phpmyadmin',
@@ -32,10 +32,13 @@
     $phpmyadmin_config_dir        =   '/etc/dbconfig-common',
     $phpmyadmin_apache_dir        =   '/etc/phpmyadmin',
     $phpmyadmin_link_dir          =   '/etc/apache2/conf.d',
+    $db_name                      =   'phpmyadmin',
+    $db_user                      =   'phpmyadmin',
+    $db_pass                      =   'phpmyadmin',
   ){
 
     $path                            =   '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin'
-    $package                         =   'phpmyadmin'
+    $phpmyadmin                      =   'phpmyadmin'
     $phpmyadmin_config_template      =   'phpmyadmin_conf'
     $phpmyadmin_config_file          =   "${phpmyadmin_config_dir}/phpmyadmin.conf"
     $phpmyadmin_apache_config_file   =   "${phpmyadmin_apache_dir}/apache.conf"
