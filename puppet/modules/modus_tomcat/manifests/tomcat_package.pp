@@ -19,8 +19,8 @@
   inherits modus_tomcat::tomcat_params {
 
     # tomcat package installation
-    if ! defined(Package["${package}"]) {
-      package { "${package}":
+    if ! defined(Package["${tomcat}"]) {
+      package { "${tomcat}":
         ensure   =>   installed,
       }
     }
@@ -29,7 +29,7 @@
     if ! defined(Package["${tomcat_admin_package}"]) {
       package { "${tomcat_admin_package}":
         ensure    =>   installed,
-        require   =>   Package["${package}"],
+        require   =>   Package["${tomcat}"],
       }
     }
 
@@ -37,7 +37,7 @@
     if ! defined(Package["${tomcat_common_package}"]) {
       package { "${tomcat_common_package}":
         ensure    =>   installed,
-        require   =>   Package["${package}"],
+        require   =>   Package["${tomcat}"],
       }
     }
 
@@ -45,7 +45,7 @@
     if ! defined(Package["${tomcat_docs_package}"]) {
       package { "${tomcat_docs_package}":
         ensure    =>   installed,
-        require   =>   Package["${package}"],
+        require   =>   Package["${tomcat}"],
       }
     }
 
@@ -53,7 +53,7 @@
     if ! defined(Package["${tomcat_examples_package}"]) {
       package { "${tomcat_examples_package}":
         ensure    =>   installed,
-        require   =>   Package["${package}"],
+        require   =>   Package["${tomcat}"],
       }
     }
 
@@ -61,7 +61,7 @@
     if ! defined(Package["${tomcat_user_package}"]) {
       package { "${tomcat_user_package}":
         ensure    =>   installed,
-        require   =>   Package["${package}"],
+        require   =>   Package["${tomcat}"],
       }
     }
   }

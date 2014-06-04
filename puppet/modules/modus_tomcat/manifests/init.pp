@@ -17,6 +17,9 @@
   # class definition - start
   class modus_tomcat {
 
+    # classes to be instantiated
+    include ::modus_openjdk
+
     include modus_tomcat::tomcat_package
     include modus_tomcat::tomcat_config
   }

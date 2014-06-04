@@ -15,16 +15,21 @@
   # module designed to deploy applications through war files in tomcat
 
   # class definition - start
-  class modus_tomcat::tomcat_war (
+  define modus_tomcat::tomcat_war (
 
-    $app_name          =   undef,
-    $target_war_file   =   undef,
-  ) inherits modus_tomcat::tomcat_params {
+    $app_name                 =   undef,
+    $target_war_file          =   undef,
+    $tomcat_package_version   =   '7'
+  ){
 
     # class required to refresh tomcat service
     include modus_tomcat::tomcat_service
+    #include modus_tomcat::tomcat_params
 
-    $tomcat_deploy_war   =   "${tomcat_autodeploy_dir}/${app_name}.war"
+    $tomcat                  =   "tomcat${tomcat_package_version}"
+    $tomcat_service          =   "${tomcat}"
+    $tomcat_autodeploy_dir   =   "/var/lib/${tomcat}/webapps"
+    $tomcat_deploy_war       =   "${tomcat_autodeploy_dir}/${app_name}.war"
 
     # creates a symlink to the original war file and deploy scm-manager in tomcat
     file { "${tomcat_deploy_war}":

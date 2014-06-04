@@ -20,6 +20,7 @@
 
     # class required for this module to work
     require modus_tomcat::tomcat_package
+    require ::modus_openjdk
 
     # class required to refresh tomcat service
     include modus_tomcat::tomcat_service
@@ -32,6 +33,7 @@
       ensure   =>   directory,
     }
 
+    # changes owner and group from 'root' to 'tomcat7' for '/usr/share/tomcat7' directory
     file { "${tomcat_share_dir}":
       ensure    =>   directory,
       replace   =>   false,
@@ -41,12 +43,21 @@
     }
 
     # ensures that the tomcat-users file for tomcat manager to be configured is present and fills it with the corresponding template
-    file { "${config_file}":
+    file { "${users_config_file}":
       ensure    =>   present,
       owner     =>   root,
       group     =>   tomcat7,
-      content   =>   template("modus_tomcat/${config_template}.erb"),
+      content   =>   template("modus_tomcat/${users_config_template}.erb"),
       notify    =>   Service["${tomcat_service}"],
+    }
+
+    # ensures that the setenv configuration file for tomcat manager to be configured is present and fills it with the corresponding template
+    file { "${tomcat_default_conf}":
+      ensure      =>   present,
+      owner       =>   root,
+      group       =>   root,
+      content     =>   template("modus_tomcat/${tomcat_default_template}.erb"),
+      subscribe   =>   File["${users_config_file}"],
     }
   }
   # class definition - end
