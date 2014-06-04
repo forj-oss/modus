@@ -19,8 +19,8 @@
   inherits modus_php::php_params {
 
     # php package installation
-    if ! defined(Package["${package}"]) {
-      package { "${package}":
+    if ! defined(Package["${php}"]) {
+      package { "${php}":
         ensure   =>   installed,
       }
     }
@@ -29,7 +29,7 @@
     if ! defined(Package["${php_apache_lib_package}"]) {
       package { "${php_apache_lib_package}":
         ensure    =>   installed,
-        require   =>   Package["${package}"],
+        require   =>   Package["${php}"],
       }
     }
 
@@ -37,7 +37,7 @@
     if ! defined(Package["${php_cli_package}"]) {
       package { "${php_cli_package}":
         ensure    =>   installed,
-        require   =>   Package["${package}"],
+        require   =>   Package["${php}"],
       }
     }
 
@@ -45,7 +45,7 @@
     if ! defined(Package["${php_mysql_package}"]) {
       package { "${php_mysql_package}":
         ensure    =>   installed,
-        require   =>   Package["${package}"],
+        require   =>   Package["${php}"],
       }
     }
 
@@ -53,7 +53,7 @@
     if ! defined(Package["${php_mcrypt_package}"]) {
       package { "${php_mcrypt_package}":
         ensure    =>   installed,
-        require   =>   Package["${package}"],
+        require   =>   Package["${php}"],
       }
     }
   }

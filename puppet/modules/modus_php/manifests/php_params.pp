@@ -20,7 +20,7 @@
     $php_package_version   =   '5',
   ){
 
-    $package                  =   "php${php_package_version}"
+    $php                      =   "php${php_package_version}"
     $php_cli_package          =   "php${php_package_version}-cli"
     $php_mysql_package        =   "php${php_package_version}-mysql"
     $php_mcrypt_package       =   "php${php_package_version}-mcrypt"
