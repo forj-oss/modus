@@ -19,5 +19,8 @@
 
     $mysql_dev                   =   'libmysqld-dev',
     $mysql_dev_package_version   =   'latest',
+    $db_name                     =   'mysql',
+    $db_user                     =   'admin',
+    $db_pass                     =   'admin',
   ){ }
   # class definition - end

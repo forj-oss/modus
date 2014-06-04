@@ -15,26 +15,31 @@
   # module designed to interact with mysql through puppetlabs-mysql module in order to create a the admin user
 
   # class definition - start
-  class modus_mysql::mysql_config {
+  class modus_mysql::mysql_config (
+
+    $db_name   =   $modus_mysql::mysql_params::db_name,
+    $db_user   =   $modus_mysql::mysql_params::db_user,
+    $db_pass   =   $modus_mysql::mysql_params::db_pass,
+  ) inherits modus_mysql::mysql_params {
 
     # class required for this module to work
     require modus_mysql::mysql_package
 
     # creates "mysql" db and "admin" user assigning all privileges to it
-    ::mysql::db { 'mysql':
-      user       =>   'admin',
-      password   =>   'admin',
+    ::mysql::db { "${db_name}":
+      user       =>   "${db_user}",
+      password   =>   "${db_pass}",
       host       =>   'localhost',
       grant      =>   ['ALL'],
     }
 
     # assign all privileges over all the system to the "admin" user
-    mysql_grant { 'admin@localhost/*.*':
+    mysql_grant { "${db_user}@localhost/*.*":
       ensure       =>   'present',
       options      =>   ['GRANT'],
       privileges   =>   ['ALL'],
       table        =>   '*.*',
-      user         =>   'admin@localhost',
+      user         =>   "${db_user}@localhost",
     }
   }
   # class definition - end
