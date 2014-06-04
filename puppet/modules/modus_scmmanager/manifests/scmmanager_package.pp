@@ -19,15 +19,17 @@
   inherits modus_scmmanager::scmmanager_params {
 
     # class required for this module to work
-    require ::modus_git::git_package
+    require ::modus_maven
+    require ::modus_mercurial
+    require ::modus_openjdk
 
-    vcsrepo { "${scmmanager_target_dir}":
-      ensure     =>   present,
-      provider   =>   hg,
-      source     =>   $scmmanager_package_source,
-      revision   =>   $scmmanager_package_revision,
-      user       =>   root,
-      group      =>   root,
+    # sonatype nexus package installation
+    exec { "${scmmanager}":
+      path        =>   $path,
+      cwd         =>   $scmmanager_target_dir,
+      user        =>   root,
+      group       =>   root,
+      logoutput   =>   true,
     }
   }
   # class definition - end

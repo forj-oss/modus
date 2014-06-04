@@ -15,26 +15,17 @@
   # module designed to install and set up scm-manager
 
   # class definition - start
-  class modus_scmmanager::scmmanager_config
-  inherits modus_scmmanager::scmmanager_params {
+  class modus_scmmanager::scmmanager_config (
 
-    # class required for this module to work
-    require modus_scmmanager::scmmanager_package
+    $app_name   =   $modus_scmmanager::scmmanager_params::app_name,
+  ) inherits modus_scmmanager::scmmanager_params {
 
-    # run mvn install clean which will set up and configure scm-manager
-    exec { "mvn clean install":
-      path          =>   $path,
-      cwd           =>   $scmmanager_target_dir,
-      user          =>   root,
-      group         =>   root,
-      logoutput     =>   true,
-      timeout       =>   0,
-    }
+    # classes required for this module to work
+    require ::modus_tomcat
 
-    class { '::modus_tomcat::tomcat_war':
+    ::modus_tomcat::tomcat_war { "${app_name}":
       app_name          =>   $app_name,
       target_war_file   =>   $target_war_file,
-      require           =>   Exec['mvn clean install'],
     }
   }
   # class definition - end

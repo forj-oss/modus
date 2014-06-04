@@ -15,18 +15,31 @@
   # this module triggers all the scripts needed to install scm-manager
 
   # class definition - start
-  class modus_scmmanager {
+  class modus_scmmanager (
+
+    $scmmanager_target_dir   =   $modus_scmmanager::scmmanager_params::scmmanager_target_dir,
+  ) inherits modus_scmmanager::scmmanager_params {
 
     # ensures that the directory for scm-manager to be installed is present
-    if ! defined(File['/tmp/scmmanager']) {
-      file { '/tmp/scmmanager':
+    if ! defined(File["${scmmanager_target_dir}"]) {
+      file { "${scmmanager_target_dir}":
         ensure   =>   directory,
         owner    =>   root,
         group    =>   root,
       }
     }
 
-    include modus_scmmanager::scmmanager_package
-    include modus_scmmanager::scmmanager_config
+    # classes to be instantiated
+    include ::modus_openjdk
+    include ::modus_maven
+    include ::modus_mercurial
+    include ::modus_tomcat
+
+    class { 'modus_scmmanager::scmmanager_package':
+      require   =>   File["${scmmanager_target_dir}"],
+    }
+    class { 'modus_scmmanager::scmmanager_config':
+      require   =>   Class['modus_scmmanager::scmmanager_package'],
+    }
   }
   # class definition - end
