@@ -22,7 +22,7 @@
     $phpldapadmin_link_dir          =   '/etc/apache2/conf.d',
   ){
 
-    $package                           =   'phpldapadmin'
+    $phpldapadmin                      =   'phpldapadmin'
     $phpldapadmin_apache_config_file   =   "${phpldapadmin_apache_dir}/apache.conf"
     $phpldapadmin_link_config_file     =   "${phpldapadmin_link_dir}/phpldapadmin.conf"
   }

@@ -19,8 +19,8 @@
   inherits modus_phpldapadmin::phpldapadmin_params {
 
     # phpldapadmin package installation
-    if ! defined(Package["${package}"]) {
-      package { "${package}":
+    if ! defined(Package["${phpldapadmin}"]) {
+      package { "${phpldapadmin}":
         ensure   =>   $phpldapadmin_package_version,
       }
     }
