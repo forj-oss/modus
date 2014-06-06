@@ -17,12 +17,12 @@
   # class definition - start
   class phpldapadmin::params (
 
-    $phpldapadmin_apache_dir        =   '/etc/phpldapadmin',
-    $phpldapadmin_link_dir          =   '/etc/apache2/conf.d',
+    $phpldapadmin_apache_dir   =   hiera('phpldapadmin::params::phpldapadmin_apache_dir', '/etc/phpldapadmin'),
+    $phpldapadmin_link_dir     =   hiera('phpldapadmin::params::phpldapadmin_link_dir', '/etc/apache2/conf.d'),
   ){
 
-    $phpldapadmin                      =   'phpldapadmin'
-    $phpldapadmin_package_version      =   'latest'
+    $phpldapadmin                      =   hiera('phpldapadmin::params::phpldapadmin', 'phpldapadmin')
+    $phpldapadmin_package_version      =   hiera('phpldapadmin::params::phpldapadmin_package_version', 'latest')
     $phpldapadmin_apache_config_file   =   "${phpldapadmin_apache_dir}/apache.conf"
     $phpldapadmin_link_config_file     =   "${phpldapadmin_link_dir}/phpldapadmin.conf"
   }

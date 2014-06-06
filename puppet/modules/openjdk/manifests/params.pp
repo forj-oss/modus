@@ -17,11 +17,11 @@
   # class definition - start
   class openjdk::params (
 
-    $openjdk_default_package_version   =   '6',
-    $openjdk_package_version           =   '7',
+    $openjdk_default_package_version   =   hiera('openjdk::params::openjdk_default_package_version', '6'),
+    $openjdk_package_version           =   hiera('openjdk::params::openjdk_package_version', '7'),
   ){
 
-    $path                          =   '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin'
+    $path                          =   hiera('openjdk::params::path', '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin')
     $openjdk_default_jre_package   =   "openjdk-${openjdk_default_package_version}-jre"
     $openjdk_default_jdk_package   =   "openjdk-${openjdk_default_package_version}-jdk"
     $openjdk_jre_package           =   "openjdk-${openjdk_package_version}-jre"
@@ -30,6 +30,6 @@
     $java_environment              =   "echo JAVA_HOME=${java_target_dir} >> /etc/environment"
 
     # set java 7 as default for the entire system
-    #$java_set              =   "update-java-alternatives --set java-1.${openjdk_package_version}.0-openjdk-amd64"
+    #$java_set                      =   "update-java-alternatives --set java-1.${openjdk_package_version}.0-openjdk-amd64"
   }
   # class definition - end

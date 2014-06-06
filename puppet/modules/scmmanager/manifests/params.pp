@@ -17,12 +17,12 @@
   # class definition - start
   class scmmanager::params (
 
-    $scmmanager_package_revision   =   '1.38',
-    $scmmanager_target_dir         =   '/usr/local/scmmanager',
-    $app_name                      =   'scm-manager',
+    $scmmanager_package_revision   =   hiera('scmmanager::params::scmmanager_package_revision', '1.38'),
+    $scmmanager_target_dir         =   hiera('scmmanager::params::scmmanager_package_revision', '/usr/local/scmmanager'),
+    $app_name                      =   hiera('scmmanager::params::scmmanager_package_revision', 'scm-manager'),
   ){
 
-    $path              =   '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin'
+    $path              =   hiera('scmmanager::params::path', '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin')
     $scmmanager        =   "wget -O ${app_name}.war http://maven.scm-manager.org/nexus/content/repositories/releases/sonia/scm/scm-webapp/${scmmanager_package_revision}/scm-webapp-${scmmanager_package_revision}.war"
     $target_war_file   =   "${scmmanager_target_dir}/${app_name}.war"
   }

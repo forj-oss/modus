@@ -17,19 +17,19 @@
   # class definition - start
   class sonarqube::params (
 
-    $sonarqube_package_version   =   '3.7.4',
-    $sonarqube_target_dir        =   '/usr/local',
-    $sonarqube_tmp_dir           =   '/tmp',
-    $app_name                    =   'sonar',
+    $sonarqube_package_version   =   hiera('sonarqube::params::sonarqube_package_version', '3.7.4'),
+    $sonarqube_target_dir        =   hiera('sonarqube::params::sonarqube_target_dir', '/usr/local'),
+    $sonarqube_tmp_dir           =   hiera('sonarqube::params::sonarqube_tmp_dir', '/tmp'),
+    $app_name                    =   hiera('sonarqube::params::app_name', 'sonar'),
   ){
 
-    $path                        =   '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin'
+    $path                        =   hiera('sonarqube::params::path', '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin')
     $sonarqube                   =   "wget -O ${app_name}.zip http://dist.sonar.codehaus.org/sonar-${sonarqube_package_version}.zip"
     $target_war_file             =   "${sonarqube_target_dir}/sonar-${sonarqube_package_version}/war/${app_name}.war"
     $sonarqube_config_file       =   "${sonarqube_target_dir}/sonar-${sonarqube_package_version}/conf/sonar.properties"
-    $sonarqube_config_template   =   'sonar_properties'
-    $db_name                     =   'sonar'
-    $db_user                     =   'sonar'
-    $db_pass                     =   'sonar'
+    $sonarqube_config_template   =   hiera('sonarqube::params::sonarqube_config_template', 'sonar_properties')
+    $db_name                     =   hiera('sonarqube::params::db_name', 'sonar')
+    $db_user                     =   hiera('sonarqube::params::db_user', 'sonar')
+    $db_pass                     =   hiera('sonarqube::params::db_pass', 'sonar')
   }
   # class definition - end

@@ -15,8 +15,10 @@
   # module designed to install and set up the latest sonarqube package
 
   # class definition - start
-  class sonarqube::package
-  inherits sonarqube::params {
+  class sonarqube::package (
+
+    $sonarqube_config_template   =   $sonarqube::params::sonarqube_config_template,
+  ) inherits sonarqube::params {
 
     # classes required for this module to work
     require ::openjdk

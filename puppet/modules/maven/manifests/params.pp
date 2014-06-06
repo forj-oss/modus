@@ -17,7 +17,7 @@
   # class definition - start
   class maven::params {
 
-    $maven                   =   'maven'
-    $maven_package_version   =   'latest'
+    $maven                   =   hiera('maven::params::maven', 'maven')
+    $maven_package_version   =   hiera('maven::params::maven_package_version', 'latest')
   }
   # class definition - end

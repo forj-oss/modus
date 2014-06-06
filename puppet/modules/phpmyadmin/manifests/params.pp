@@ -17,33 +17,30 @@
   # class definition - start
   class phpmyadmin::params (
 
-    $phpmyadmin_config_dir   =   '/etc/dbconfig-common',
-    $phpmyadmin_apache_dir   =   '/etc/phpmyadmin',
-    $phpmyadmin_link_dir     =   '/etc/apache2/conf.d',
+    $phpmyadmin_config_dir   =   hiera('phpmyadmin::params::phpmyadmin_config_dir', '/etc/dbconfig-common'),
+    $phpmyadmin_apache_dir   =   hiera('phpmyadmin::params::phpmyadmin_apache_dir', '/etc/phpmyadmin'),
+    $phpmyadmin_link_dir     =   hiera('phpmyadmin::params::phpmyadmin_link_dir', '/etc/apache2/conf.d'),
+    $dbc_dbname              =   hiera('phpmyadmin::params::dbc_dbname', 'phpmyadmin'),
+    $dbc_dbuser              =   hiera('phpmyadmin::params::dbc_dbuser', 'phpmyadmin'),
+    $dbc_dbpass              =   hiera('phpmyadmin::params::dbc_dbpass', 'phpmyadmin'),
   ){
 
-    $path                            =   '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin'
-    $dbc_install                     =   'true'
-    $dbc_upgrade                     =   'true'
-    $dbc_remove                      =   ''
-    $dbc_dbtype                      =   'mysql'
-    $dbc_dbuser                      =   'phpmyadmin'
-    $dbc_dbpass                      =   'phpmyadmin'
-    $dbc_dbserver                    =   ''
-    $dbc_dbport                      =   ''
-    $dbc_dbname                      =   'phpmyadmin'
-    $dbc_dbadmin                     =   'root'
-    $dbc_basepath                    =   ''
-    $phpmyadmin                      =   'phpmyadmin'
-    $phpmyadmin_package_version      =   'latest'
-    $phpmyadmin_config_template      =   'phpmyadmin_conf'
+    $path                            =   hiera('phpmyadmin::params::path', '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin')
+    $dbc_install                     =   hiera('phpmyadmin::params::dbc_install', 'true')
+    $dbc_upgrade                     =   hiera('phpmyadmin::params::dbc_upgrade', 'true')
+    $dbc_remove                      =   hiera('phpmyadmin::params::dbc_remove', '')
+    $dbc_dbtype                      =   hiera('phpmyadmin::params::dbc_dbtype', 'mysql')
+    $dbc_dbserver                    =   hiera('phpmyadmin::params::dbc_dbserver', '')
+    $dbc_dbport                      =   hiera('phpmyadmin::params::dbc_dbport', '')
+    $dbc_dbadmin                     =   hiera('phpmyadmin::params::dbc_dbadmin', 'root')
+    $dbc_basepath                    =   hiera('phpmyadmin::params::dbc_basepath', '')
+    $phpmyadmin                      =   hiera('phpmyadmin::params::phpmyadmin', 'phpmyadmin')
+    $phpmyadmin_package_version      =   hiera('phpmyadmin::params::phpmyadmin_package_version', 'latest')
+    $phpmyadmin_config_template      =   hiera('phpmyadmin::params::phpmyadmin_config_template', 'phpmyadmin_conf')
     $phpmyadmin_config_file          =   "${phpmyadmin_config_dir}/phpmyadmin.conf"
     $phpmyadmin_apache_config_file   =   "${phpmyadmin_apache_dir}/apache.conf"
     $phpmyadmin_link_config_file     =   "${phpmyadmin_link_dir}/phpmyadmin.conf"
     $phpmyadmin_db_config_file       =   "${phpmyadmin_apache_dir}/config-db.php"
-    $phpmyadmin_db_config_template   =   'config_db_php'
-    $db_name                         =   'phpmyadmin'
-    $db_user                         =   'phpmyadmin'
-    $db_pass                         =   'phpmyadmin'
+    $phpmyadmin_db_config_template   =   hiera('phpmyadmin::params::phpmyadmin_db_config_template', 'config_db_php')
   }
   # class definition - end

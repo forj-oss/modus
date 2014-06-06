@@ -17,12 +17,12 @@
   # class definition - start
   class jenkins::params (
 
-    $jenkins_package_revision   =   '1.566',
-    $jenkins_target_dir         =   '/usr/local/jenkins',
-    $app_name                   =   'jenkins',
+    $jenkins_package_revision   =   hiera('jenkins::params::jenkins_package_revision', '1.566'),
+    $jenkins_target_dir         =   hiera('jenkins::params::jenkins_target_dir', '/usr/local/jenkins'),
+    $app_name                   =   hiera('jenkins::params::app_name', 'jenkins'),
   ){
 
-    $path              =   '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin'
+    $path              =   hiera('jenkins::params::path', '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin')
     $jenkins           =   "wget -O ${app_name}.war http://mirrors.jenkins-ci.org/war/${jenkins_package_revision}/jenkins.war"
     $target_war_file   =   "${jenkins_target_dir}/${app_name}.war"
   }

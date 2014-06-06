@@ -17,9 +17,9 @@
   # class definition - start
   class mercurial::params {
 
-    $mercurial                   =   'mercurial'
-    $mercurial_package_version   =   'latest'
-    $meld                        =   'meld'
-    $meld_package_version        =   'latest'
+    $mercurial                   =   hiera('mercurial::params::mercurial', 'mercurial')
+    $mercurial_package_version   =   hiera('mercurial::params::mercurial_package_version', 'latest')
+    $meld                        =   hiera('mercurial::params::meld', 'meld')
+    $meld_package_version        =   hiera('mercurial::params::meld_package_version', 'latest')
   }
   # class definition - end

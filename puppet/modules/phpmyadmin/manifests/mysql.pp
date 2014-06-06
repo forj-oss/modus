@@ -15,17 +15,13 @@
   # module designed to interact with mysql through puppetlabs-mysql module in order to create a new database with its user for bugzilla to work with
 
   # class definition - start
-  class phpmyadmin::mysql (
-
-    $db_name   =   $phpmyadmin::params::db_name,
-    $db_user   =   $phpmyadmin::params::db_user,
-    $db_pass   =   $phpmyadmin::params::db_pass,
-  ) inherits phpmyadmin::params {
+  class phpmyadmin::mysql
+  inherits phpmyadmin::params {
 
     # creates "phpmyadmin" database and user on localhost and manage them within mysql
-    ::mysql::db { "${db_name}":
-      user       =>   "${db_user}",
-      password   =>   "${db_pass}",
+    ::mysql::db { "${dbc_dbname}":
+      user       =>   "${dbc_dbuser}",
+      password   =>   "${dbc_dbpass}",
       host       =>   'localhost',
       grant      =>   ['ALL'],
     }

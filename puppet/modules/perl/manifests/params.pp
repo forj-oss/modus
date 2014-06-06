@@ -17,10 +17,11 @@
   # class definition - start
   class perl::params {
 
-    $path                      =   '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin'
-    $perl                      =   'perl'
-    $perl_package_version      =   'latest'
-    $install_option            =   'required'
-    $perl_modules_target_dir   =   '/usr/local/bugzilla'
+    $path                      =   hiera('perl::params::path', '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin')
+    $perl                      =   hiera('perl::params::perl', 'perl')
+    $perl_package_version      =   hiera('perl::params::perl_package_version', 'latest')
+    $install_option            =   hiera('perl::params::install_option', 'required')
+    $perl_modules_target_dir   =   hiera('perl::params::install_option', '/usr/local/bugzilla')
     $perl_modules              =   "perl install-module.pl --all"
   }
+  # class definition - end

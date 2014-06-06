@@ -17,9 +17,9 @@
   # class definition - start
   class openldap::params {
 
-    $openldap_package_version   =   'latest'
-    $utils_package_version      =   'latest'
-    $server_package             =   'slapd'
-    $utils_package              =   'ldap-utils'
+    $openldap_package_version   =   hiera('openldap::params::openldap_package_version', 'latest')
+    $utils_package_version      =   hiera('openldap::params::utils_package_version', 'latest')
+    $server_package             =   hiera('openldap::params::server_package', 'slapd')
+    $utils_package              =   hiera('openldap::params::utils_package', 'ldap-utils')
   }
   # class definition - end

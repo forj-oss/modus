@@ -15,8 +15,15 @@
   # module designed to configure tomcat
 
   # class definition - start
-  class tomcat::config
-  inherits tomcat::params {
+  class tomcat::config (
+
+    $users_config_template     =   $tomcat::params::users_config_template,
+    $tomcat_default_template   =   $tomcat::params::tomcat_default_template,
+    $role_manager_gui          =   $tomcat::params::role_manager_gui,
+    $role_manager_status       =   $tomcat::params::role_manager_status,
+    $user_admin                =   $tomcat::params::user_admin,
+    $pass_admin                =   $tomcat::params::pass_admin,
+  ) inherits tomcat::params {
 
     # class required for this module to work
     require tomcat::package

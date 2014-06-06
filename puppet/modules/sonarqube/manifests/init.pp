@@ -18,24 +18,13 @@
   class sonarqube
   inherits sonarqube::params {
 
-    # ensures that the directory for sonarqube to be installed is present
-    /*if ! defined(File["${sonarqube_target_dir}"]) {
-      file { "${sonarqube_target_dir}":
-        ensure   =>   directory,
-        owner    =>   root,
-        group    =>   root,
-      }
-    }*/
-
     # classes to be instantiated
     include ::openjdk
     include ::maven
     include ::mysql_starter
     include ::tomcat
 
-    class { 'sonarqube::package':
-      #require   =>   File["${nexus_target_dir}"],
-    }
+    class { 'sonarqube::package': }
     class { 'sonarqube::mysql':
       require   =>   Class['sonarqube::package'],
     }

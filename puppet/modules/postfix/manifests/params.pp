@@ -17,21 +17,21 @@
   # class definition - start
   class postfix::params (
 
-    $postfix_target_dir   =   '/etc/postfix',
+    $postfix_target_dir   =   hiera('postfix::params::postfix_target_dir', '/etc/postfix'),
+    $config_template      =   hiera('postfix::params::config_template', 'main_cf'),
   ){
 
-    $postfix                   =   'postfix'
-    $postfix_package_version   =   'latest'
-    $myhostname                =    $fqdn
-    $alias_maps                =   '/etc/aliases'
-    $alias_database            =   '/etc/aliases'
-    $myorigin                  =   '/etc/mailname'
-    $relayhost                 =   ''
+    $postfix                   =   hiera('postfix::params::postfix', 'postfix')
+    $postfix_package_version   =   hiera('postfix::params::postfix_package_version', 'latest')
+    $myhostname                =   $fqdn
+    $alias_maps                =   hiera('postfix::params::alias_maps', '/etc/aliases')
+    $alias_database            =   hiera('postfix::params::alias_database', '/etc/aliases')
+    $myorigin                  =   hiera('postfix::params::myorigin', '/etc/mailname')
+    $relayhost                 =   hiera('postfix::params::relayhost', '')
     $mynetworks                =   "127.0.0.0/8 [::ffff:127.0.0.0]/104 [::1]/128"
-    $mailbox_size_limit        =   0
-    $recipient_delimiter       =   '+'
-    $inet_interfaces           =   'all'
-    $config_template           =   'main_cf'
+    $mailbox_size_limit        =   hiera('postfix::params::mailbox_size_limit', 0)
+    $recipient_delimiter       =   hiera('postfix::params::recipient_delimiter', '+')
+    $inet_interfaces           =   hiera('postfix::params::inet_interfaces', 'all')
     $config_file               =   "${postfix_target_dir}/${$config_template}"
     $mydestination             =   "${myhostname}, localhost.${domain}, , localhost"
   }

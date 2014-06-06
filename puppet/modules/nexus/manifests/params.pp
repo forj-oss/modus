@@ -17,13 +17,13 @@
   # class definition - start
   class nexus::params (
 
-    $nexus_package_version   =   '2.8.0',
-    $nexus_target_dir        =   '/usr/local/nexus',
-    $app_name                =   'nexus',
+    $nexus_package_version   =   hiera('nexus::params::nexus_package_version', '2.8.0'),
+    $nexus_target_dir        =   hiera('nexus::params::nexus_target_dir', '/usr/local/nexus'),
+    $app_name                =   hiera('nexus::params::app_name', 'nexus'),
   ){
 
-    $path                    =   '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin'
-    $nexus                   =   "wget -O ${app_name}.war http://www.sonatype.org/downloads/nexus-${nexus_package_version}.war"
-    $target_war_file         =   "${nexus_target_dir}/${app_name}.war"
+    $path              =   hiera('nexus::params::path', '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin')
+    $nexus             =   "wget -O ${app_name}.war http://www.sonatype.org/downloads/nexus-${nexus_package_version}.war"
+    $target_war_file   =   "${nexus_target_dir}/${app_name}.war"
   }
   # class definition - end

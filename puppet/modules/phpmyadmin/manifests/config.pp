@@ -17,17 +17,16 @@
   # class definition - start
   class phpmyadmin::config (
 
-    $dbc_install    =   'true',
-    $dbc_upgrade    =   'true',
-    $dbc_remove     =   '',
-    $dbc_dbtype     =   'mysql',
-    $dbc_dbuser     =   'phpmyadmin',
-    $dbc_dbpass     =   'phpmyadmin',
-    $dbc_dbserver   =   '',
-    $dbc_dbport     =   '',
-    $dbc_dbname     =   'phpmyadmin',
-    $dbc_dbadmin    =   'root',
-    $dbc_basepath   =   '',
+    $dbc_install                     =   $phpmyadmin::params::dbc_install,
+    $dbc_upgrade                     =   $phpmyadmin::params::dbc_upgrade,
+    $dbc_remove                      =   $phpmyadmin::params::dbc_remove,
+    $dbc_dbtype                      =   $phpmyadmin::params::dbc_dbtype,
+    $dbc_dbserver                    =   $phpmyadmin::params::dbc_dbserver,
+    $dbc_dbport                      =   $phpmyadmin::params::dbc_dbport,
+    $dbc_dbadmin                     =   $phpmyadmin::params::dbc_dbadmin,
+    $dbc_basepath                    =   $phpmyadmin::params::dbc_basepath,
+    $phpmyadmin_config_template      =   $phpmyadmin::params::phpmyadmin_config_template,
+    $phpmyadmin_db_config_template   =   $phpmyadmin::params::phpmyadmin_db_config_template,
   ) inherits phpmyadmin::params {
 
     # class required for this module to work

@@ -17,10 +17,10 @@
   # class definition - start
   class mysql_starter::params {
 
-    $mysql_dev                   =   'libmysqld-dev'
-    $mysql_dev_package_version   =   'latest'
-    $db_name                     =   'mysql'
-    $db_user                     =   'admin'
-    $db_pass                     =   'admin'
+    $mysql_dev                   =   hiera('mysql_starter::params::mysql_dev', 'libmysqld-dev')
+    $mysql_dev_package_version   =   hiera('mysql_starter::params::mysql_dev_package_version', 'latest')
+    $db_name                     =   hiera('mysql_starter::params::db_name', 'mysql')
+    $db_user                     =   hiera('mysql_starter::params::db_user', 'admin')
+    $db_pass                     =   hiera('mysql_starter::params::db_pass', 'admin')
   }
   # class definition - end

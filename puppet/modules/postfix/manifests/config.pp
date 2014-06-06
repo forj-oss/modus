@@ -40,3 +40,4 @@
       content   =>   template("postfix/${config_template}.erb"),
     }
   }
+  # class definition - end

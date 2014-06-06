@@ -17,7 +17,7 @@
   # class definition - start
   class php::params (
 
-    $php_package_version   =   '5',
+    $php_package_version   =   hiera('php::params::php_package_version', '5'),
   ){
 
     $php                      =   "php${php_package_version}"
