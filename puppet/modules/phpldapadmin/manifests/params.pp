@@ -24,6 +24,9 @@
     $phpldapadmin                      =   hiera('phpldapadmin::params::phpldapadmin', 'phpldapadmin')
     $phpldapadmin_package_version      =   hiera('phpldapadmin::params::phpldapadmin_package_version', 'latest')
     $phpldapadmin_apache_config_file   =   "${phpldapadmin_apache_dir}/apache.conf"
-    $phpldapadmin_link_config_file     =   "${phpldapadmin_link_dir}/phpldapadmin.conf"
+    $phpldapadmin_link_config_file     =   "${phpldapadmin_link_dir}/phpldapadmin"
+    $phpldapadmin_config_file          =   hiera('phpldapadmin::params::phpldapadmin_config_file', '/etc/phpldapadmin/config.php')
+    $phpldapadmin_config_template      =   hiera('phpldapadmin::params::phpldapadmin_config_template', 'config_php')
+    $suffix                            =   hiera('phpldapadmin::params::suffix', 'dc=modus,dc=local')
   }
   # class definition - end

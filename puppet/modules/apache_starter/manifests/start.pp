@@ -26,5 +26,12 @@
     include ::apache::mod::headers
     include ::apache::mod::expires
     include ::apache::mod::php
+
+    ::apache::mod { 'proxy_connect': }
+    include ::apache::mod::deflate
+    include ::apache::mod::proxy
+    include ::apache::mod::proxy_ajp
+    include ::apache::mod::proxy_http
+    include ::apache::mod::rewrite
   }
   # class definition - end

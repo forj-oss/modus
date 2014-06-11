@@ -15,8 +15,11 @@
   # module designed to set up phpldapadmin
 
   # class definition - start
-  class phpldapadmin::config
-  inherits phpldapadmin::params {
+  class phpldapadmin::config (
+
+    $phpldapadmin_config_template   =   $phpldapadmin::params::phpldapadmin_config_template,
+    $suffix                         =   $phpldapadmin::params::suffix,
+  ) inherits phpldapadmin::params {
 
     # class required for this module to work
     require phpldapadmin::package
@@ -27,6 +30,14 @@
       ensure   =>   link,
       target   =>   $phpldapadmin_apache_config_file,
       notify   =>   Class['::apache::service'],
+    }
+
+    # ensures that the config file for phpldapadmin to be configured is present
+    file { "${phpldapadmin_config_file}":
+      ensure    =>   present,
+      owner     =>   root,
+      group     =>   www-data,
+      content   =>   template("phpldapadmin/${phpldapadmin_config_template}.erb"),
     }
   }
   # class definition - end

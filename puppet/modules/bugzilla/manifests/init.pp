@@ -29,6 +29,7 @@
 
     # classes to be instantiated
     include ::apache_starter
+    include ::git
     include ::mysql_starter
     include ::perl
 

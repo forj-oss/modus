@@ -18,5 +18,6 @@
   class apache_starter {
 
     include apache_starter::start
+    #include apache_starter::config
   }
   # class definition - end

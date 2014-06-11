@@ -19,7 +19,7 @@
   inherits bugzilla::params {
 
     # apache vhost creation and set up
-    ::apache::vhost { 'localhost':
+    ::apache::vhost { 'bugzilla':
       port            =>   "${bugzilla_port}",
       docroot         =>   "${bugzilla_target_dir}",
       docroot_owner   =>   'www-data',

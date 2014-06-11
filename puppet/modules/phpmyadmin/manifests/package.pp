@@ -21,9 +21,6 @@
     $phpmyadmin_package_version   =   $phpmyadmin::params::phpmyadmin_package_version,
   ) inherits phpmyadmin::params {
 
-    # class required for this module to work (without this the "phpmyadmin" db won't be correctly created)
-    require ::mysql_starter
-
     # phpmyadmin package installation
     if ! defined(Package["${phpmyadmin}"]) {
       package { "${phpmyadmin}":

@@ -19,13 +19,13 @@
 
     include ::mysql_starter
     include ::apache_starter
-    
-    class { 'phpmyadmin::package': }
-    class { 'phpmyadmin::mysql':
-      require   =>   Class['phpmyadmin::package'],
+
+    class { 'phpmyadmin::mysql': }
+    class { 'phpmyadmin::package':
+      require   =>   Class['phpmyadmin::mysql'],
     }
     class { 'phpmyadmin::config':
-      require   =>   Class['phpmyadmin::mysql'],
+      require   =>   Class['phpmyadmin::package'],
     }
   }
   # class definition - end

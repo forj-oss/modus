@@ -1,0 +1,86 @@
+# ************************************
+# Vhost template in module puppetlabs-apache
+# Managed by Puppet
+# ************************************
+
+<VirtualHost *:80>
+  ServerName default
+  ServerAdmin root@localhost
+  proxyPreserveHost On
+  RewriteEngine On
+  RewriteOptions Inherit
+  AllowEncodedSlashes On
+
+  ## Reverse Proxy SCM-Manager
+  ProxyPass /scm-manager http://localhost:8080/scm-manager
+  ProxyPassReverse /scm-manager http://localhost:8080/scm-manager
+
+  ## Reverse Proxy Tomcat App Manager
+  ProxyPass /manager http://localhost:8080/manager
+  ProxyPassReverse /manager http://localhost:8080/manager
+
+  ## Reverse Proxy Sonarqube
+  ##ProxyPass /sonar http://localhost:8080/sonar
+  ##ProxyPassReverse /sonar http://localhost:8080/sonar
+
+  ## Reverse Proxy Jenkins
+  ProxyPass /jenkins http://localhost:8080/jenkins nocanon
+  ProxyPassReverse /jenkins http://localhost:8080/jenkins
+
+  ## Reverse Proxy Nexus
+  ProxyPass /nexus http://localhost:8080/nexus
+  ProxyPassReverse /nexus http://localhost:8080/nexus
+
+  ## Reverse Tomcat Docs
+  ProxyPass /docs http://localhost:8080/docs
+  ProxyPassReverse /docs http://localhost:8080/docs
+
+  ## Reverse Tomcat Examples
+  ProxyPass /examples http://localhost:8080/examples
+  ProxyPassReverse /examples http://localhost:8080/examples
+
+  ## Reverse Tomcat Host Manager
+  ProxyPass /host-manager http://localhost:8080/host-manager
+  ProxyPassReverse /host-manager http://localhost:8080/host-manager
+
+  ## Vhost docroot
+  DocumentRoot "/var/www"
+
+
+
+  ## Directories, there should at least be a declaration for /var/www
+
+
+  <Directory "/var/www">
+    Options Indexes FollowSymLinks MultiViews
+    AllowOverride None
+    Order allow,deny
+    Allow from all
+  </Directory>
+
+  ## Load additional static includes
+
+
+  ## Logging
+  ErrorLog "/var/log/apache2/default_error.log"
+  ServerSignature Off
+  CustomLog "/var/log/apache2/access.log" combined
+
+
+
+  ## Script alias directives
+  ScriptAlias /cgi-bin/ "/usr/lib/cgi-bin"
+</VirtualHost>
+<%## (c) Copyright 2014 Hewlett-Packard Development Company, L.P.
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.%>

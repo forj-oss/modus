@@ -29,6 +29,7 @@
       cwd         =>   $scmmanager_target_dir,
       user        =>   root,
       group       =>   root,
+      timeout     =>   0,
       logoutput   =>   true,
     }
   }

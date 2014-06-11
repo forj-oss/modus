@@ -21,6 +21,9 @@
     $bugzilla_package_revision   =   $bugzilla::params::bugzilla_package_revision,
   ) inherits bugzilla::params {
 
+    # class required for this module to work
+    require ::git
+
     vcsrepo { "${bugzilla_target_dir}":
       ensure     =>   present,
       provider   =>   git,

@@ -18,6 +18,9 @@
   class phpmyadmin::mysql
   inherits phpmyadmin::params {
 
+    # class required for this module to work
+    require ::mysql_starter
+
     # creates "phpmyadmin" database and user on localhost and manage them within mysql
     ::mysql::db { "${dbc_dbname}":
       user       =>   "${dbc_dbuser}",
