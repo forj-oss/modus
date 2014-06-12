@@ -23,7 +23,6 @@
     # classes required for this module to work
     require ::openjdk
     require ::maven
-    require ::mysql_starter
 
     # sonarqube package
     exec { "${sonarqube}":
@@ -31,6 +30,7 @@
       cwd         =>   $sonarqube_tmp_dir,
       user        =>   root,
       group       =>   root,
+      timeout     =>   0,
       logoutput   =>   true,
     }
 
@@ -53,14 +53,24 @@
       require   =>   Exec["unzip ${sonarqube_tmp_dir}/${app_name}.zip"],
     }
 
+    # sonarqube start
+    exec { "sh sonar.sh start":
+      path        =>   $path,
+      cwd         =>   "${sonarqube_target_dir}/sonar-${sonarqube_package_version}/bin/linux-x86-64",
+      user        =>   root,
+      group       =>   root,
+      logoutput   =>   true,
+      require     =>   File["${sonarqube_config_file}"],
+    }
+
     # sonarqube war file creation
-    exec { "sh build-war.sh":
+    /*exec { "sh build-war.sh":
       path        =>   $path,
       cwd         =>   "${sonarqube_target_dir}/sonar-${sonarqube_package_version}/war",
       user        =>   root,
       group       =>   root,
       logoutput   =>   true,
       require     =>   File["${sonarqube_config_file}"],
-    }
+    }*/
   }
   # class definition - end

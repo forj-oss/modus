@@ -22,6 +22,9 @@
     $db_pass   =   $sonarqube::params::db_pass,
   ) inherits sonarqube::params {
 
+    # class required for this module to work
+    require ::mysql_starter
+
     # creates "sonarqube" db and user on localhost and manage them within mysql
     ::mysql::db { "${db_name}":
       user       =>   "${db_user}",

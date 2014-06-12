@@ -24,12 +24,12 @@
     include ::mysql_starter
     include ::tomcat
 
-    class { 'sonarqube::package': }
-    class { 'sonarqube::mysql':
-      require   =>   Class['sonarqube::package'],
-    }
-    class { 'sonarqube::config':
+    class { 'sonarqube::mysql': }
+    class { 'sonarqube::package':
       require   =>   Class['sonarqube::mysql'],
     }
+    /*class { 'sonarqube::config':
+      require   =>   Class['sonarqube::package'],
+    }*/
   }
   # class definition - end
