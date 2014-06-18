@@ -18,6 +18,9 @@
   class bugzilla::apache
   inherits bugzilla::params {
 
+    # class required for this module to work
+    require ::apache_starter
+
     # apache vhost creation and set up
     ::apache::vhost { 'bugzilla':
       port            =>   "${bugzilla_port}",

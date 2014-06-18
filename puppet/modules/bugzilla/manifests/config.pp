@@ -39,9 +39,7 @@
     $urlbase                =   $bugzilla::params::urlbase,
   ) inherits bugzilla::params {
 
-    # classes required for this module to work
-    require ::apache_starter
-    require ::mysql_starter
+    # class required for this module to work
     require ::perl
 
     # ensures that the answer file for bugzilla to be configured is present and fills it with the corresponding template

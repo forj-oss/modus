@@ -18,6 +18,9 @@
   class bugzilla::mysql
   inherits bugzilla::params {
 
+    # class required for this module to work
+    require ::mysql_starter
+
     # creates "bugzilla" db and user on localhost and manage them within mysql
     ::mysql::db { "${db_name}":
       user       =>   "${db_user}",
