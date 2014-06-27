@@ -31,7 +31,7 @@
     $tomcat_service            =   "${tomcat}"
     $tomcat_staging_dir        =   "/var/lib/${tomcat}/staging"
     $tomcat_user               =   "${tomcat}"
-    $tomcat_group              =   "${tomcat}"    
+    $tomcat_group              =   "${tomcat}"
     $tomcat_user_homedir       =   "/usr/share/${tomcat}"
     $tomcat_target_dir         =   "/etc/${tomcat}"
     $tomcat_share_dir          =   "/usr/share/${tomcat}"
