@@ -12,16 +12,10 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-# module designed to verify tomcat service
+##Overview
 
-# class definition - start
-class tomcat::service
-inherits tomcat::params {
+Module for git installation.
 
-  # verify if tomcat service is running
-  service { $tomcat::params::tomcat_service:
-    ensure => running,
-    enable => true,
-  }
-}
-# class definition - end
+##Module Description
+
+Git is a distributed revision control and source code management (SCM) system with an emphasis on speed.

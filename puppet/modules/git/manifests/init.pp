@@ -12,31 +12,10 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-# this module triggers all the scripts needed to install jenkins
-
+# this module triggers all the scripts needed to install git package
 # class definition - start
-class jenkins
-inherits jenkins::params {
 
-  # ensures that the directory for jenkins to be installed is present
-  if ! defined(File[$jenkins::params::jenkins_target_dir]) {
-    file { $jenkins::params::jenkins_target_dir:
-      ensure => directory,
-      owner  => root,
-      group  => root,
-    }
-  }
-
-  # classes to be instantiated
-  include ::maven
-  include ::openjdk
-  include ::tomcat
-
-  class { 'jenkins::package':
-    require => File[$jenkins::params::jenkins_target_dir],
-  }
-  class { 'jenkins::config':
-    require => Class['jenkins::package'],
-  }
+class git {
+  include git::package
 }
 # class definition - end

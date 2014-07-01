@@ -3,6 +3,7 @@
 	<name>modus</name>
 	<comment></comment>
 	<projects>
+		<project>maestro</project>
 		<project>puppet</project>
 	</projects>
 	<buildSpec>
