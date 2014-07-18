@@ -22,7 +22,7 @@ class tomcat::config (
   $role_manager_gui        = $tomcat::params::role_manager_gui,
   $role_manager_status     = $tomcat::params::role_manager_status,
   $user_admin              = $tomcat::params::user_admin,
-  $pass_admin              = $tomcat::params::pass_admin,
+  $pass_admin_default      = $tomcat::params::pass_admin,
 ) inherits tomcat::params {
 
   # class required for this module to work
@@ -31,6 +31,17 @@ class tomcat::config (
 
   # class required to refresh tomcat service
   include tomcat::service
+
+  if $pass_admin_default == '' or $pass_admin_default == undef
+  {
+    $pass_admin = random_password(16)
+    $replace = false
+  }
+  else
+  {
+    $pass_admin = $pass_admin_default
+    $replace = true
+  }
 
   file { $tomcat::params::tomcat_autodeploy_dir:
     ensure => directory,
@@ -56,6 +67,7 @@ class tomcat::config (
     group   => tomcat7,
     content => template("tomcat/${users_config_template}.erb"),
     notify  => Service[$tomcat::params::tomcat_service],
+    replace => $replace,
   }
 
   # ensures that the setenv configuration file for tomcat manager to be configured is present and fills it with the corresponding template

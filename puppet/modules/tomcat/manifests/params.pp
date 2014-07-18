@@ -20,7 +20,6 @@ class tomcat::params (
   $tomcat_package_version  = hiera('tomcat::params::tomcat_package_version', '7'),
   $openjdk_package_version = hiera('tomcat::params::openjdk_package_version', '7'),
 ){
-
   $tomcat                  = "tomcat${tomcat_package_version}"
   $tomcat_admin_package    = "${tomcat}-admin"
   $tomcat_common_package   = "${tomcat}-common"
@@ -43,6 +42,6 @@ class tomcat::params (
   $role_manager_gui        = hiera('tomcat::params::role_manager_gui', 'manager-gui')
   $role_manager_status     = hiera('tomcat::params::role_manager_status', 'admin-gui')
   $user_admin              = hiera('tomcat::params::user_admin', 'admin')
-  $pass_admin              = hiera('tomcat::params::pass_admin', 'admin')
+  $pass_admin              = hiera('tomcat::params::pass_admin', '')
 }
 # class definition - end
