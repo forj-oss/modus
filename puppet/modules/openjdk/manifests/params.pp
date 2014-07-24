@@ -26,7 +26,7 @@ class openjdk::params (
   $openjdk_default_jdk_package = "openjdk-${openjdk_default_package_version}-jdk"
   $openjdk_jre_package         = "openjdk-${openjdk_package_version}-jre"
   $openjdk_jdk_package         = "openjdk-${openjdk_package_version}-jdk"
-  $java_target_dir             = "/usr/lib/jvm/java-${openjdk_default_package_version}-openjdk-amd64"
+  $java_target_dir             = "/usr/lib/jvm/java-${openjdk_default_package_version}-openjdk-${::architecture}"
   $java_environment            = "echo JAVA_HOME=${java_target_dir} >> /etc/environment"
 
   # set java 7 as default for the entire system

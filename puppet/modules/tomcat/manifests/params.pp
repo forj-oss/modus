@@ -36,7 +36,7 @@ class tomcat::params (
   $tomcat_share_dir        = "/usr/share/${tomcat}"
   $users_config_template   = hiera('tomcat::params::users_config_template', 'tomcat_users')
   $users_config_file       = "${tomcat_target_dir}/tomcat-users.xml"
-  $java_target_dir         = "/usr/lib/jvm/java-${openjdk_package_version}-openjdk-amd64"
+  $java_target_dir         = "/usr/lib/jvm/java-${openjdk_package_version}-openjdk-${::architecture}"
   $tomcat_default_conf     = "/etc/default/${tomcat}"
   $tomcat_default_template = hiera('tomcat::params::tomcat_default_template', 'tomcat')
   $role_manager_gui        = hiera('tomcat::params::role_manager_gui', 'manager-gui')
