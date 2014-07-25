@@ -26,7 +26,7 @@ class bugzilla::params (
 ){
 
   $path                      = hiera('bugzilla::params::path', '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin')
-  $bugzilla_vhost            = hiera('bugzilla::params::bugzilla_vhost', $ec2_public_ipv4)
+  $bugzilla_vhost            = hiera('bugzilla::params::bugzilla_vhost', $::ec2_public_ipv4)
   $bugzilla_protocol         = hiera('bugzilla::params::bugzilla_protocol','http')
   $create_htaccess           = hiera('bugzilla::params::create_htaccess', true)
   $webservergroup            = hiera('bugzilla::params::webservergroup', 'www-data')
