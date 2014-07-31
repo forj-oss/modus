@@ -12,18 +12,21 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-# class definition - start
-define jenkins::copy_job_templates (
+# resource definition - start
+define jenkins::manage_plugins (
 
-  $job_template   = $title,
-  $jjb_target_dir = undef,
+  $plugin_name = $name,
+  $data        = undef,
 ){
 
-  file { "${jjb_target_dir}/config/${job_template}.yaml":
-    ensure  => present,
-    owner   => root,
-    group   => root,
-    content => template("jenkins/${job_template}_yaml.erb"),
+  # class required to refresh tomcat service
+  include ::tomcat::service
+
+  if ! defined(Jenkins::Plugin[$plugin_name]) {
+    jenkins::plugin { $plugin_name:
+      version => $data[$plugin_name],
+      notify  => Service['tomcat7'],
+    }
   }
 }
-# class definition - end
+# resource definition - end

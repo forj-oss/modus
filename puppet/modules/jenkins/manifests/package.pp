@@ -22,7 +22,7 @@ inherits jenkins::params {
   require ::openjdk
   require ::maven
 
-  # sonatype nexus package installation
+  # jenkins package installation
   exec { $jenkins::params::jenkins:
     path      => $jenkins::params::path,
     cwd       => $jenkins::params::jenkins_target_dir,
@@ -30,6 +30,7 @@ inherits jenkins::params {
     group     => root,
     timeout   => 0,
     logoutput => true,
+    onlyif    => "test ! -e ${jenkins::params::jenkins_target_dir}/${jenkins::params::app_name}.war",
   }
 }
 # class definition - end

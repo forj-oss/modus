@@ -20,24 +20,17 @@ class jenkins::job_builder_execute (
 
   $jjb_target_dir = $jenkins::params::jjb_target_dir
 
+  # creates config folder for default templates to be stored
   file { "${jjb_target_dir}/config":
     ensure => directory,
     owner  => root,
     group  => root,
   }
 
-  jenkins::copy_job_templates { $job_template:
-    jjb_target_dir => $jjb_target_dir,
-    require        => File["${jjb_target_dir}/config"],
-    before         => Exec["jenkins-jobs --ignore-cache update ${jjb_target_dir}/config"],
-  }
-
-  exec { "jenkins-jobs --ignore-cache update ${jjb_target_dir}/config":
-    path      => '/usr/bin:/usr/sbin/:/bin:/sbin:/usr/local/bin:/usr/local/sbin',
-    logoutput => true,
-    user      => root,
-    group     => root,
-    onlyif    => 'test -d /usr/share/tomcat7/.jenkins/jobs',
+  jenkins::manage_job_templates { $job_template:
+    jjb_target_dir   => $jjb_target_dir,
+    jenkins_jobs_dir => $jenkins::params::jenkins_jobs_dir,
+    require          => File["${jjb_target_dir}/config"],
   }
 }
 # class definition - end
