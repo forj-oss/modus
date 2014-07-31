@@ -38,5 +38,12 @@ inherits jenkins::params {
   class { 'jenkins::config':
     require => Class['jenkins::package'],
   }
+  class { 'jenkins::job_builder':
+    require => Class['jenkins::config'],
+  }
+  class { 'jenkins::job_builder_execute':
+    job_template => ['hello_world'],
+    require      => Class['jenkins::job_builder'],
+  }
 }
 # class definition - end
