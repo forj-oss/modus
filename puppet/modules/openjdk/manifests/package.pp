@@ -18,20 +18,6 @@
 class openjdk::package
 inherits openjdk::params {
 
-  # openjdk jre default package installation
-  if ! defined(Package[$openjdk::params::openjdk_default_jre_package]) {
-    package { $openjdk::params::openjdk_default_jre_package:
-      ensure => installed,
-    }
-  }
-
-  # openjdk jdk default package installation
-  if ! defined(Package[$openjdk::params::openjdk_default_jdk_package]) {
-    package { $openjdk::params::openjdk_default_jdk_package:
-      ensure => installed,
-    }
-  }
-
   # openjdk jre package installation
   if ! defined(Package[$openjdk::params::openjdk_jre_package]) {
     package { $openjdk::params::openjdk_jre_package:
@@ -43,6 +29,20 @@ inherits openjdk::params {
   if ! defined(Package[$openjdk::params::openjdk_jdk_package]) {
     package { $openjdk::params::openjdk_jdk_package:
       ensure => installed,
+    }
+  }
+
+  # remove openjdk jre 6 package if present
+  if defined(Package['openjdk-6-jre']) {
+    package { 'openjdk-6-jre':
+      ensure  => purged,
+    }
+  }
+
+  # remove openjdk jdk 6 package if present
+  if defined(Package['openjdk-6-jdk']) {
+    package { 'openjdk-6-jdk':
+      ensure  => purged,
     }
   }
 }
