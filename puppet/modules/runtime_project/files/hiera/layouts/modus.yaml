@@ -12,29 +12,18 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-# this module triggers all the scripts needed to install and setup modus blueprint
+classes:
+  - maestro::node_vhost_lookup
+  - orchestrator
+  - runtime_project::jenkins
+  - sysadmin_config::manage_servers
 
-class orchestrator {
-
-  # common packages
-  include ::apache_starter
-  include ::git
-  include ::maven
-  include ::mercurial
-  include ::mysql_starter
-  include ::openjdk
-  include ::perl
-  include ::php
-  include ::postfix
-
-  # stack
-  include ::bugzilla
-  #include ::jenkins
-  include ::nexus
-  include ::openldap
-  include ::phpldapadmin
-  include ::phpmyadmin
-  include ::scmmanager
-  include ::sonarqube
-  include ::tomcat
-}
+# setup server (iptables, rsyslog, tcpdump, ssh)
+sysadmin_config::manage_servers::iptables_public_tcp_ports:
+  - 22
+  #- 25
+  - 80
+  - 443
+  - 3000
+  - 3001
+  - 8080
