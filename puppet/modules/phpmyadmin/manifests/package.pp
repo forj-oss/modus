@@ -12,10 +12,20 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-##Overview
+# module designed to install and set up the latest phpmyadmin package
 
-Module for bugzilla installation.
+# class definition - start
+class phpmyadmin::package (
 
-##Module Description
+  $phpmyadmin                 = $phpmyadmin::params::phpmyadmin,
+  $phpmyadmin_package_version = $phpmyadmin::params::phpmyadmin_package_version,
+) inherits phpmyadmin::params {
 
-Bugzilla is a web-based general-purpose bugtracker and testing tool originally developed and used by the Mozilla project, and licensed under the Mozilla Public License.
+  # phpmyadmin package installation
+  if ! defined(Package[$phpmyadmin]) {
+    package { $phpmyadmin:
+      ensure => $phpmyadmin_package_version,
+    }
+  }
+}
+# class definition - end

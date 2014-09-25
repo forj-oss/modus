@@ -12,10 +12,20 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-##Overview
+# module designed to install and set up the latest postfix package
 
-Module for bugzilla installation.
+# class definition - start
+class postfix::package (
 
-##Module Description
+  $postfix                 = $postfix::params::postfix,
+  $postfix_package_version = $postfix::params::postfix_package_version,
+) inherits postfix::params {
 
-Bugzilla is a web-based general-purpose bugtracker and testing tool originally developed and used by the Mozilla project, and licensed under the Mozilla Public License.
+  # postfix package installation
+  if ! defined(Package[$postfix]) {
+    package { $postfix:
+      ensure => $postfix_package_version,
+    }
+  }
+}
+# class definition - end

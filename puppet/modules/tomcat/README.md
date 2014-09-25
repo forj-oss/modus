@@ -14,8 +14,8 @@
 
 ##Overview
 
-Module for bugzilla installation.
+Module for Tomcat installation.
 
 ##Module Description
 
-Bugzilla is a web-based general-purpose bugtracker and testing tool originally developed and used by the Mozilla project, and licensed under the Mozilla Public License.
+Apache Tomcat is an open source software implementation of the Java Servlet and JavaServer Pages technologies. The Java Servlet and JavaServer Pages specifications are developed under the Java Community Process.

@@ -1,0 +1,76 @@
+# (c) Copyright 2014 Hewlett-Packard Development Company, L.P.
+#
+#   Licensed under the Apache License, Version 2.0 (the "License");
+#   you may not use this file except in compliance with the License.
+#   You may obtain a copy of the License at
+#
+#       http://www.apache.org/licenses/LICENSE-2.0
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+
+# module designed to install and set up the latest sonarqube package
+
+# class definition - start
+class sonarqube::package (
+
+  $sonarqube_config_template = $sonarqube::params::sonarqube_config_template,
+) inherits sonarqube::params {
+
+  # classes required for this module to work
+  require ::openjdk
+  require ::maven
+
+  # sonarqube package
+  exec { $sonarqube::params::sonarqube:
+    path      => $sonarqube::params::path,
+    cwd       => $sonarqube::params::sonarqube_tmp_dir,
+    user      => root,
+    group     => root,
+    timeout   => 0,
+    logoutput => true,
+  }
+
+  # sonarqube package extraction
+  exec { "unzip ${sonarqube::params::sonarqube_tmp_dir}/${sonarqube::params::app_name}.zip":
+    path      => $sonarqube::params::path,
+    cwd       => $sonarqube::params::sonarqube_target_dir,
+    user      => root,
+    group     => root,
+    logoutput => true,
+    require   => Exec[$sonarqube::params::sonarqube],
+  }
+
+  # ensures that the config file for sonarqube to be configured is present
+  file { $sonarqube::params::sonarqube_config_file:
+    ensure  => present,
+    owner   => root,
+    group   => root,
+    content => template("sonarqube/${sonarqube_config_template}.erb"),
+    require => Exec["unzip ${sonarqube::params::sonarqube_tmp_dir}/${sonarqube::params::app_name}.zip"],
+  }
+
+  # sonarqube start
+  exec { 'sh sonar.sh start':
+    path      => $sonarqube::params::path,
+    cwd       => "${sonarqube::params::sonarqube_target_dir}/sonar-${sonarqube::params::sonarqube_package_version}/bin/linux-x86-64",
+    user      => root,
+    group     => root,
+    logoutput => true,
+    require   => File[$sonarqube::params::sonarqube_config_file],
+  }
+
+  # sonarqube war file creation
+  #exec { 'sh build-war.sh':
+    #path      => $sonarqube::params::path,
+    #cwd       => "${sonarqube::params::sonarqube_target_dir}/sonar-${sonarqube::params::sonarqube_package_version}/war",
+    #user      => root,
+    #group     => root,
+    #logoutput => true,
+    #require   => File["${sonarqube::params::sonarqube_config_file}"],
+  #}
+}
+# class definition - end

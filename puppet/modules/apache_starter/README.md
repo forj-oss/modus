@@ -14,8 +14,8 @@
 
 ##Overview
 
-Module for bugzilla installation.
+Module for Apache HTTP Server installation.
 
 ##Module Description
 
-Bugzilla is a web-based general-purpose bugtracker and testing tool originally developed and used by the Mozilla project, and licensed under the Mozilla Public License.
+The Apache HTTP Server Project is an effort to develop and maintain an open-source HTTP server for modern operating systems including UNIX and Windows NT. The goal of this project is to provide a secure, efficient and extensible server that provides HTTP services in sync with the current HTTP standards.

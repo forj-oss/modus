@@ -12,10 +12,21 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-##Overview
+# resource definition - start
+define jenkins::manage_plugins (
 
-Module for bugzilla installation.
+  $plugin_name = $name,
+  $data        = undef,
+){
 
-##Module Description
+  # class required to refresh tomcat service
+  include ::tomcat::service
 
-Bugzilla is a web-based general-purpose bugtracker and testing tool originally developed and used by the Mozilla project, and licensed under the Mozilla Public License.
+  if ! defined(Jenkins::Plugin[$plugin_name]) {
+    jenkins::plugin { $plugin_name:
+      version => $data[$plugin_name],
+      notify  => Service['tomcat7'],
+    }
+  }
+}
+# resource definition - end

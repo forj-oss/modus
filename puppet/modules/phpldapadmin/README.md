@@ -14,8 +14,8 @@
 
 ##Overview
 
-Module for bugzilla installation.
+Module for phpLDAPadmin installation.
 
 ##Module Description
 
-Bugzilla is a web-based general-purpose bugtracker and testing tool originally developed and used by the Mozilla project, and licensed under the Mozilla Public License.
+phpLDAPadmin (also known as PLA) is a web-based LDAP client. It provides easy, anywhere-accessible, multi-language administration for your LDAP server.

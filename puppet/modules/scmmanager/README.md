@@ -14,8 +14,8 @@
 
 ##Overview
 
-Module for bugzilla installation.
+Module for SCM-Manager installation.
 
 ##Module Description
 
-Bugzilla is a web-based general-purpose bugtracker and testing tool originally developed and used by the Mozilla project, and licensed under the Mozilla Public License.
+SCM-Manager allows you to manage your source code repositories via an intuitive web interface. It unifies the management of Git, Subversion and Mercurial repositories and enables distributed development teams to administer user rights without having to deal with complex configuration files.

@@ -14,8 +14,8 @@
 
 ##Overview
 
-Module for bugzilla installation.
+Module for postfix installation.
 
 ##Module Description
 
-Bugzilla is a web-based general-purpose bugtracker and testing tool originally developed and used by the Mozilla project, and licensed under the Mozilla Public License.
+Postfix is a mail server that started life at IBM research as an alternative to the widely-used Sendmail program. Postfix attempts to be fast, easy to administer, and secure. The outside has a definite Sendmail-ish flavor, but the inside is completely different.

@@ -12,10 +12,19 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-##Overview
+# module designed to verify postfix service
 
-Module for bugzilla installation.
+# class definition - start
+class postfix::service
+inherits postfix::params {
 
-##Module Description
+  # class required for this module to work
+  require postfix::config
 
-Bugzilla is a web-based general-purpose bugtracker and testing tool originally developed and used by the Mozilla project, and licensed under the Mozilla Public License.
+  # verify if postfix service is running
+  service { $postfix::params::postfix:
+    ensure => running,
+    enable => true,
+  }
+}
+# class definition - end

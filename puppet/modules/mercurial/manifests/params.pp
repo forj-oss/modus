@@ -12,10 +12,14 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-##Overview
+# module designed to set up the parameters needed for mercurial package
 
-Module for bugzilla installation.
+# class definition - start
+class mercurial::params {
 
-##Module Description
-
-Bugzilla is a web-based general-purpose bugtracker and testing tool originally developed and used by the Mozilla project, and licensed under the Mozilla Public License.
+  $mercurial                 = hiera('mercurial::params::mercurial', 'mercurial')
+  $mercurial_package_version = hiera('mercurial::params::mercurial_package_version', 'latest')
+  $meld                      = hiera('mercurial::params::meld', 'meld')
+  $meld_package_version      = hiera('mercurial::params::meld_package_version', 'latest')
+}
+# class definition - end

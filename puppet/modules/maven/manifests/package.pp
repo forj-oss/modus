@@ -12,10 +12,23 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-##Overview
+# module designed to install and set up the latest maven package
 
-Module for bugzilla installation.
+# class definition - start
+class maven::package (
 
-##Module Description
+  $maven                 = $maven::params::maven,
+  $maven_package_version = $maven::params::maven_package_version,
+) inherits maven::params {
 
-Bugzilla is a web-based general-purpose bugtracker and testing tool originally developed and used by the Mozilla project, and licensed under the Mozilla Public License.
+  # class required for this module to work
+  require ::openjdk
+
+  # maven package installation
+  if ! defined(Package[$maven]) {
+    package { $maven:
+      ensure => $maven_package_version,
+    }
+  }
+}
+# class definition - end

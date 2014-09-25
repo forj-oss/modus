@@ -12,10 +12,14 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-##Overview
+# this module triggers all the scripts needed to install phpldapadmin
 
-Module for bugzilla installation.
+# class definition - start
+class phpldapadmin {
 
-##Module Description
-
-Bugzilla is a web-based general-purpose bugtracker and testing tool originally developed and used by the Mozilla project, and licensed under the Mozilla Public License.
+  #include ::mysql_starter
+  include ::apache_starter
+  include phpldapadmin::package
+  include phpldapadmin::config
+}
+# class definition - end

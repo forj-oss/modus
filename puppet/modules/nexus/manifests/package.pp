@@ -12,10 +12,24 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-##Overview
+# module designed to install and set up the latest sonatype nexus package
 
-Module for bugzilla installation.
+# class definition - start
+class nexus::package
+inherits nexus::params {
 
-##Module Description
+  # classes required for this module to work
+  require ::openjdk
+  require ::maven
 
-Bugzilla is a web-based general-purpose bugtracker and testing tool originally developed and used by the Mozilla project, and licensed under the Mozilla Public License.
+  # sonatype nexus package installation
+  exec { $nexus::params::nexus:
+    path      => $nexus::params::path,
+    cwd       => $nexus::params::nexus_target_dir,
+    user      => root,
+    group     => root,
+    timeout   => 0,
+    logoutput => true,
+  }
+}
+# class definition - end

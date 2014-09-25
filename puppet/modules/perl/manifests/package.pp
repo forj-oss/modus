@@ -12,10 +12,20 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-##Overview
+# module designed to install the latest perl package
 
-Module for bugzilla installation.
+# class definition - start
+class perl::package (
 
-##Module Description
+  $perl                 = $perl::params::perl,
+  $perl_package_version = $perl::params::perl_package_version,
+) inherits perl::params {
 
-Bugzilla is a web-based general-purpose bugtracker and testing tool originally developed and used by the Mozilla project, and licensed under the Mozilla Public License.
+  # perl package installation
+  if ! defined(Package[$perl]) {
+    package { $perl:
+      ensure => $perl_package_version,
+    }
+  }
+}
+# class definition - end

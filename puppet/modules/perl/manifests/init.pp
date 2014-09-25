@@ -12,10 +12,11 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-##Overview
+# this module triggers all the scripts needed to install perl and its modules
 
-Module for bugzilla installation.
+# class definition - start
+class perl {
 
-##Module Description
-
-Bugzilla is a web-based general-purpose bugtracker and testing tool originally developed and used by the Mozilla project, and licensed under the Mozilla Public License.
+  include perl::package
+}
+# class definition - end

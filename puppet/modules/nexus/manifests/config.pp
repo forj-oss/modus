@@ -12,10 +12,18 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-##Overview
+# module designed to install and set up sonatype nexus
 
-Module for bugzilla installation.
+# class definition - start
+class nexus::config
+inherits nexus::params {
 
-##Module Description
+  # classes required for this module to work
+  require ::tomcat
 
-Bugzilla is a web-based general-purpose bugtracker and testing tool originally developed and used by the Mozilla project, and licensed under the Mozilla Public License.
+  ::tomcat::war { $nexus::params::app_name:
+    app_name        => $nexus::params::app_name,
+    target_war_file => $nexus::params::target_war_file,
+  }
+}
+# class definition - end

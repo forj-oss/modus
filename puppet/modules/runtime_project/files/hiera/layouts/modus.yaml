@@ -12,10 +12,18 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-##Overview
+classes:
+  - maestro::node_vhost_lookup
+  - orchestrator
+  - runtime_project::jenkins
+  - sysadmin_config::manage_servers
 
-Module for bugzilla installation.
-
-##Module Description
-
-Bugzilla is a web-based general-purpose bugtracker and testing tool originally developed and used by the Mozilla project, and licensed under the Mozilla Public License.
+# setup server (iptables, rsyslog, tcpdump, ssh)
+sysadmin_config::manage_servers::iptables_public_tcp_ports:
+  - 22
+  #- 25
+  - 80
+  - 443
+  - 3000
+  - 3001
+  - 8080

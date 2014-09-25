@@ -12,10 +12,21 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-##Overview
+# module designed to interact with mysql through puppetlabs-mysql module in order to create a new database with its user for bugzilla to work with
 
-Module for bugzilla installation.
+# class definition - start
+class bugzilla::mysql
+inherits bugzilla::params {
 
-##Module Description
+  # class required for this module to work
+  require ::mysql_starter
 
-Bugzilla is a web-based general-purpose bugtracker and testing tool originally developed and used by the Mozilla project, and licensed under the Mozilla Public License.
+  # creates "bugzilla" db and user on localhost and manage them within mysql
+  ::mysql::db { $bugzilla::params::db_name:
+    user     => $bugzilla::params::db_user,
+    password => $bugzilla::params::db_pass,
+    host     => 'localhost',
+    grant    => ['ALL'],
+  }
+}
+# class definition - end

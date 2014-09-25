@@ -12,10 +12,29 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-##Overview
+# this module triggers all the scripts needed to install and setup modus blueprint
 
-Module for bugzilla installation.
+class orchestrator {
 
-##Module Description
+  # common packages
+  include ::apache_starter
+  include ::git
+  include ::maven
+  include ::mercurial
+  include ::mysql_starter
+  include ::openjdk
+  include ::perl
+  include ::php
+  include ::postfix
 
-Bugzilla is a web-based general-purpose bugtracker and testing tool originally developed and used by the Mozilla project, and licensed under the Mozilla Public License.
+  # stack
+  include ::bugzilla
+  #include ::jenkins
+  include ::nexus
+  include ::openldap
+  include ::phpldapadmin
+  include ::phpmyadmin
+  include ::scmmanager
+  include ::sonarqube
+  include ::tomcat
+}

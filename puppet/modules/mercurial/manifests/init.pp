@@ -12,10 +12,11 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-##Overview
+# this module triggers all the scripts needed to install mercurial
 
-Module for bugzilla installation.
+# class definition - start
+class mercurial {
 
-##Module Description
-
-Bugzilla is a web-based general-purpose bugtracker and testing tool originally developed and used by the Mozilla project, and licensed under the Mozilla Public License.
+  include mercurial::package
+}
+# class definition - end

@@ -11,11 +11,16 @@
 #   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
+require 'rubygems'
+require 'puppetlabs_spec_helper/rake_tasks'
+require 'puppet-lint/tasks/puppet-lint'
+PuppetLint.configuration.fail_on_warnings = true
 
-##Overview
+# Disable check due to complexity added while reading/writing manifests
+PuppetLint.configuration.send('disable_80chars')
 
-Module for bugzilla installation.
+# Disable check due to upstream bug: https://github.com/rodjek/puppet-lint/issues/170
+PuppetLint.configuration.send('disable_class_parameter_defaults')
 
-##Module Description
-
-Bugzilla is a web-based general-purpose bugtracker and testing tool originally developed and used by the Mozilla project, and licensed under the Mozilla Public License.
+# Disable check, no need to be compatible with Puppet 2.6.2 and earlier
+PuppetLint.configuration.send('disable_class_inherits_from_params_class')

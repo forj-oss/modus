@@ -12,10 +12,25 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-##Overview
+# module designed to install and set up the latest jenkins package
 
-Module for bugzilla installation.
+# class definition - start
+class jenkins::package
+inherits jenkins::params {
 
-##Module Description
+  # class required for this module to work
+  require ::openjdk
+  require ::maven
 
-Bugzilla is a web-based general-purpose bugtracker and testing tool originally developed and used by the Mozilla project, and licensed under the Mozilla Public License.
+  # jenkins package installation
+  exec { $jenkins::params::jenkins:
+    path      => $jenkins::params::path,
+    cwd       => $jenkins::params::jenkins_target_dir,
+    user      => root,
+    group     => root,
+    timeout   => 0,
+    logoutput => true,
+    onlyif    => "test ! -e ${jenkins::params::jenkins_target_dir}/${jenkins::params::app_name}.war",
+  }
+}
+# class definition - end

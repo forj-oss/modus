@@ -12,10 +12,18 @@
 #   See the License for the specific language governing permissions and
 #   limitations under the License.
 
-##Overview
+# module designed to set up the parameters needed for php package
 
-Module for bugzilla installation.
+# class definition - start
+class php::params (
 
-##Module Description
+  $php_package_version = hiera('php::params::php_package_version', '5'),
+){
 
-Bugzilla is a web-based general-purpose bugtracker and testing tool originally developed and used by the Mozilla project, and licensed under the Mozilla Public License.
+  $php                    = "php${php_package_version}"
+  $php_cli_package        = "php${php_package_version}-cli"
+  $php_mysql_package      = "php${php_package_version}-mysql"
+  $php_mcrypt_package     = "php${php_package_version}-mcrypt"
+  $php_apache_lib_package = "libapache2-mod-php${php_package_version}"
+}
+# class definition - end
